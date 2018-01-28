@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
  */
 public class AvocatCommisDOffice extends Serviteur{
 
+	public AvocatCommisDOffice() {
+		super("Avocat commis d'office", 2, 7, 0, false, false);
+	}
+
 }
