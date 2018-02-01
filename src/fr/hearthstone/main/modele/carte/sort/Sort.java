@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.Carte;
  */
 public abstract class Sort extends Carte{
 
+	public Sort(String name, int manaCost) {
+		super(name, manaCost);
+	}
+
 }

@@ -9,7 +9,7 @@ package fr.hearthstone.main.modele;
  */
 public interface Cible {
 
-	public void beAttacked(int damageAmount);
+	public boolean beAttacked(int damageAmount);
 	public void beHealed(int healAmount);
 	public void attack(Cible target);
 	

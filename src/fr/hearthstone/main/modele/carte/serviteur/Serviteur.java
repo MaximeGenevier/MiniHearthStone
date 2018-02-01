@@ -33,11 +33,13 @@ public abstract class Serviteur extends Carte implements Cible{
 		target.beAttacked(this.attack);
 	}
 	
-	public void beAttacked(int damageAmount) {
+	public boolean beAttacked(int damageAmount) {
 		if(this.currentHealth > damageAmount) {
 			this.currentHealth -= damageAmount;
+			return false;
 		}else {
 			System.out.println(this.getName() + " die.");
+			return true;
 		}
 	}
 	
