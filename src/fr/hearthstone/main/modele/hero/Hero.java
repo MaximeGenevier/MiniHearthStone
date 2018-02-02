@@ -12,6 +12,7 @@ import fr.hearthstone.main.modele.Cible;
 public abstract class Hero implements Cible{
 	
 	private String name;
+	private Competence ability;
 	private int currentHealth;
 	private int maxHealth;
 	private int currentMana;
