@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class ImageMiroir extends Sort{
 
+	public ImageMiroir() {
+		super("Image miroir", 1);
+	}
+
 }

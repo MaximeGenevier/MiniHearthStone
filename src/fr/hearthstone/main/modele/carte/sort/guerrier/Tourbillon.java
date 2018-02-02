@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class Tourbillon extends Sort{
 
+	public Tourbillon() {
+		super("Tourbillon", 1);
+	}
+
 }

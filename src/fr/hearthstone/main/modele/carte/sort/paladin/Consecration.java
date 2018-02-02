@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class Consecration extends Sort{
 
+	public Consecration() {
+		super("Consécration", 4);
+	}
+
 }

@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class ExplosionDesArcanes extends Sort{
 
+	public ExplosionDesArcanes() {
+		super("Explosion des arcanes", 2);
+	}
+
 }

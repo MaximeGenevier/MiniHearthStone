@@ -11,4 +11,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class Metamorphose extends Sort{
 
+	public Metamorphose() {
+		super("Métamorphose", 4);
+	}
+
 }
