@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.carte.sort.guerrier;
 
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.sort.Sort;
 
 /**
@@ -11,8 +12,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class Tourbillon extends Sort{
 
-	public Tourbillon() {
-		super("Tourbillon", 1);
+	public Tourbillon(Joueur player) {
+		super("Tourbillon", 1, player);
 	}
 
 }

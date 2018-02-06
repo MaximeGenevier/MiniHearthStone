@@ -3,19 +3,27 @@
  */
 package fr.hearthstone.main.modele.carte;
 
+import fr.hearthstone.main.modele.Joueur;
+
 /**
  * @author Maxime
  *
  */
 public abstract class Carte {
 
-	private String name;
-	private int manaCost;
+	protected String name;
+	protected int manaCost;
+	protected Joueur player;
 	
-	public Carte(String name, int manaCost) {
+	public Carte() {
+		super();
+	}
+	
+	public Carte(String name, int manaCost, Joueur player) {
 		super();
 		this.name = name;
 		this.manaCost = manaCost;
+		this.player = player;
 	}
 
 	/**
@@ -44,6 +52,30 @@ public abstract class Carte {
 	 */
 	public void setManaCost(int manaCost) {
 		this.manaCost = manaCost;
+	}
+
+	/**
+	 * @return the player
+	 */
+	public Joueur getPlayer() {
+		return player;
+	}
+
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Joueur player) {
+		this.player = player;
+	}
+	
+	public String describe() {
+		String desc = "[CARTE]\n\t{NOM} = " + this.getName() + "\t{COUT} = " + this.getManaCost();
+		return desc;
+	}
+	
+	@Override
+	public String toString() {
+		return this.describe();
 	}
 	
 }

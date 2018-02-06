@@ -4,6 +4,7 @@
 package fr.hearthstone.main.modele.hero;
 
 import fr.hearthstone.main.modele.Cible;
+import fr.hearthstone.main.modele.Joueur;
 
 /**
  * @author Maxime
@@ -11,8 +12,12 @@ import fr.hearthstone.main.modele.Cible;
  */
 public class Paladin extends Hero{
 
-	public Paladin() {
-		super("Paladin");
+	public Paladin(Joueur player) {
+		super("Paladin", player);
+		this.addAvailableCardName("ChampionFrisselame");
+		this.addAvailableCardName("RecrueDeLaMainDArgent");
+		this.addAvailableCardName("BenedictionDePuissance");
+		this.addAvailableCardName("Consecration");
 	}
 
 	/* (non-Javadoc)

@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.carte.sort.guerrier;
 
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.sort.Sort;
 
 /**
@@ -11,8 +12,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class MaitriseDuBlocage extends Sort{
 
-	public MaitriseDuBlocage() {
-		super("Maitrise du blocage", 3);
+	public MaitriseDuBlocage(Joueur player) {
+		super("Maitrise du blocage", 3, player);
 	}
 
 }

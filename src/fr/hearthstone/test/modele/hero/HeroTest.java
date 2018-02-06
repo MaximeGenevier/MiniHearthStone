@@ -18,15 +18,7 @@ public class HeroTest {
 	
 	@Test
 	public void heroMethodsTest() {
-		Hero mage = new Mage();
 		
-		mage.beAttacked(15);
-		mage.increaseArmor(6);
-		mage.beAttacked(16);
-		mage.beAttacked(10);
-		
-		Hero paladin = new Paladin();
-		Hero guerrier = new Guerrier();
 	}
 
 }

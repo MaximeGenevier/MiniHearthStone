@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.carte.serviteur.commun;
 
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
@@ -11,8 +12,15 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
  */
 public class ChevaucheurDeLoup extends Serviteur{
 
-	public ChevaucheurDeLoup() {
-		super("Chevaucheur de loup", 3, 1, 3, false, false);
+	public ChevaucheurDeLoup(Joueur player) {
+		this.name = "Chevaucheur de loup";
+		this.manaCost = 3;
+		this.maxHealth = 1;
+		this.currentHealth = this.maxHealth;
+		this.attack = 3;
+		this.canAttack = false;
+		this.shouldBeAttack = false;
+		this.player = player;
 	}
 
 }

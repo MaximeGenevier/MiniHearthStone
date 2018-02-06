@@ -5,7 +5,6 @@ package fr.hearthstone.main.modele.carte.serviteur;
 
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.carte.Carte;
-import fr.hearthstone.main.modele.hero.Hero;
 
 /**
  * @author Maxime
@@ -13,21 +12,11 @@ import fr.hearthstone.main.modele.hero.Hero;
  */
 public abstract class Serviteur extends Carte implements Cible{
 
-	private int currentHealth;
-	private int maxHealth;
-	private int attack;
-	private boolean shouldBeAttack;
-	private boolean canAttack;
-	
-	public Serviteur(String name, int manaCost, int maxHealth, int attack,
-			boolean shouldBeAttack, boolean canAttack) {
-		super(name, manaCost);
-		this.maxHealth = maxHealth;
-		this.currentHealth = this.maxHealth;
-		this.attack = attack;
-		this.shouldBeAttack = shouldBeAttack;
-		this.canAttack = canAttack;
-	}
+	protected int currentHealth;
+	protected int maxHealth;
+	protected int attack;
+	protected boolean shouldBeAttack;
+	protected boolean canAttack;
 	
 	public void attack(Cible target) {
 		target.beAttacked(this.attack);
@@ -132,4 +121,14 @@ public abstract class Serviteur extends Carte implements Cible{
 		this.canAttack = canAttack;
 	}
 	
+	@Override
+	public String describe() {
+		String desc = super.describe() + "\t{ATTAQUE} = " + this.getAttack() + "\t{VIE} = " + this.getCurrentHealth();
+		return desc;
+	}
+	
+	@Override
+	public String toString() {
+		return this.describe();
+	}
 }

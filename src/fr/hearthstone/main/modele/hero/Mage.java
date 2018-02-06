@@ -4,6 +4,7 @@
 package fr.hearthstone.main.modele.hero;
 
 import fr.hearthstone.main.modele.Cible;
+import fr.hearthstone.main.modele.Joueur;
 
 /**
  * @author Maxime
@@ -11,8 +12,13 @@ import fr.hearthstone.main.modele.Cible;
  */
 public class Mage extends Hero{
 
-	public Mage() {
-		super("Mage");
+	public Mage(Joueur player) {
+		super("Mage", player);
+		this.addAvailableCardName("Mouton");
+		this.addAvailableCardName("Reflet");
+		this.addAvailableCardName("ExplosionDesArcanes");
+		this.addAvailableCardName("ImageMiroir");
+		this.addAvailableCardName("Metamorphose");
 	}
 
 	/* (non-Javadoc)

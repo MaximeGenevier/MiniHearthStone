@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.carte.sort.paladin;
 
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.sort.Sort;
 
 /**
@@ -11,8 +12,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class Consecration extends Sort{
 
-	public Consecration() {
-		super("Consécration", 4);
+	public Consecration(Joueur player) {
+		super("Consécration", 4, player);
 	}
 
 }

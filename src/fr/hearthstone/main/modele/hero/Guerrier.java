@@ -4,6 +4,7 @@
 package fr.hearthstone.main.modele.hero;
 
 import fr.hearthstone.main.modele.Cible;
+import fr.hearthstone.main.modele.Joueur;
 
 /**
  * @author Maxime
@@ -11,8 +12,11 @@ import fr.hearthstone.main.modele.Cible;
  */
 public class Guerrier extends Hero{
 
-	public Guerrier() {
-		super("Guerrier");
+	public Guerrier(Joueur player) {
+		super("Guerrier", player);
+		this.addAvailableCardName("AvocatCommisDOffice");
+		this.addAvailableCardName("MaitriseDuBlocage");
+		this.addAvailableCardName("Tourbillon");
 	}
 
 	/* (non-Javadoc)

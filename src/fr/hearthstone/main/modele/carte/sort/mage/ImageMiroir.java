@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.carte.sort.mage;
 
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.sort.Sort;
 
 /**
@@ -11,8 +12,8 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
  */
 public class ImageMiroir extends Sort{
 
-	public ImageMiroir() {
-		super("Image miroir", 1);
+	public ImageMiroir(Joueur player) {
+		super("Image miroir", 1, player);
 	}
 
 }

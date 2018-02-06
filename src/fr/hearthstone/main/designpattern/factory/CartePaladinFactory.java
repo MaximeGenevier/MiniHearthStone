@@ -3,6 +3,10 @@
  */
 package fr.hearthstone.main.designpattern.factory;
 
+import fr.hearthstone.main.designpattern.decorator.Charge;
+import fr.hearthstone.main.designpattern.decorator.Provocation;
+import fr.hearthstone.main.designpattern.decorator.VolDeVie;
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.commun.ChefDeRaid;
 import fr.hearthstone.main.modele.carte.serviteur.commun.ChevaucheurDeLoup;
@@ -21,36 +25,36 @@ import fr.hearthstone.main.modele.carte.sort.paladin.Consecration;
 public class CartePaladinFactory extends CarteFactory{
 
 	@Override
-	public Carte makeCard(String name) {
+	protected Carte makeCard(String name, Joueur player) {
 		Carte card;
 		
 		switch(name) {
 			case "ChefDeRaid" :
-				card = new ChefDeRaid();
+				card = new ChefDeRaid(player);
 				break;
 			case "ChevaucheurDeLoup" :
-				card = new ChevaucheurDeLoup();
+				card = new Charge( new ChevaucheurDeLoup(player));
 				break;
 			case "SanglierBrocheroc" :
-				card = new SanglierBrocheroc();
+				card = new SanglierBrocheroc(player);
 				break;
 			case "SoldatDuComteDeLor" :
-				card = new SoldatDuComteDeLOr();
+				card = new Provocation(new SoldatDuComteDeLOr(player));
 				break;
 			case "YetiNoroit" : 
-				card = new YetiNoroit();
+				card = new YetiNoroit(player);
 				break;
 			case "ChampionFrisselame" :
-				card = new ChampionFrisselame();
+				card = new VolDeVie(new ChampionFrisselame(player));
 				break;
 			case "RecrueDeLaMainDArgent" : 
-				card = new RecrueDeLaMainDArgent();
+				card = new RecrueDeLaMainDArgent(player);
 				break;
 			case "BenedictionDePuissance" :
-				card = new BenedictionDePuissance();
+				card = new BenedictionDePuissance(player);
 				break;
 			case "Consecration" :
-				card = new Consecration();
+				card = new Consecration(player);
 				break;
 			default:
 				return null;

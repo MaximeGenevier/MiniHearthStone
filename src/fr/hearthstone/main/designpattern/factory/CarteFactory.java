@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.designpattern.factory;
 
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.Carte;
 
 /**
@@ -11,11 +12,11 @@ import fr.hearthstone.main.modele.carte.Carte;
  */
 public abstract class CarteFactory {
 
-	public Carte pickCard(String name) {
-		Carte card = this.makeCard(name);
+	public Carte drawCard(String name, Joueur player) {
+		Carte card = this.makeCard(name, player);
 		return card;
 	}
 	
-	public abstract Carte makeCard(String name);
+	protected abstract Carte makeCard(String name, Joueur player);
 	
 }

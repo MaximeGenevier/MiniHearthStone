@@ -3,7 +3,12 @@
  */
 package fr.hearthstone.main.modele.hero;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.hearthstone.main.modele.Cible;
+import fr.hearthstone.main.modele.Joueur;
+import fr.hearthstone.main.modele.competence.Competence;
 
 /**
  * @author Maxime
@@ -11,15 +16,17 @@ import fr.hearthstone.main.modele.Cible;
  */
 public abstract class Hero implements Cible{
 	
-	private String name;
-	private Competence ability;
-	private int currentHealth;
-	private int maxHealth;
-	private int currentMana;
-	private int maxMana;
-	private int armor;
+	protected String name;
+	protected Competence ability;
+	protected int currentHealth;
+	protected int maxHealth;
+	protected int currentMana;
+	protected int maxMana;
+	protected int armor;
+	protected List<String> availableCardsName;
+	protected Joueur player;
 	
-	public Hero(String name) {
+	public Hero(String name, Joueur player) {
 		super();
 		this.name = name;
 		this.currentHealth = 30;
@@ -27,6 +34,16 @@ public abstract class Hero implements Cible{
 		this.maxMana = 1;
 		this.currentMana = this.maxMana;
 		this.armor = 0;
+		this.player = player;
+		this.availableCardsName = new ArrayList<String>();
+		// Cette liste est utilisée pour tirer une carte aléatoirement
+		// dans la méthode drawCard()
+		// Est remplie ici avec les cartes communes
+		this.addAvailableCardName("ChefDeRaid");
+		this.addAvailableCardName("ChevaucheurDeLoup");
+		this.addAvailableCardName("SanglierBrocheroc");
+		this.addAvailableCardName("SoldatDuComteDeLor");
+		this.addAvailableCardName("YetiNoroit");
 	}
 
 	public boolean beAttacked(int damageAmount) {
@@ -172,6 +189,17 @@ public abstract class Hero implements Cible{
 	 */
 	public void setArmor(int armor) {
 		this.armor = armor;
+	}
+
+	/**
+	 * @return the availableCardsName
+	 */
+	public List<String> getAvailableCardsName() {
+		return availableCardsName;
+	}
+
+	public void addAvailableCardName(String name) {
+		this.availableCardsName.add(name);
 	}
 	
 }
