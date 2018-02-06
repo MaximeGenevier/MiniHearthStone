@@ -13,7 +13,7 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
 public class Metamorphose extends Sort{
 
 	public Metamorphose(Joueur player) {
-		super("MÃ©tamorphose", 4, player);
+		super("Métamorphose", 4, player);
 	}
 
 }

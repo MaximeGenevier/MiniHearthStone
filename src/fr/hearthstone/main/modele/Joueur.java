@@ -65,4 +65,14 @@ public class Joueur {
 		this.cardsInHand = cardsInHand;
 	}
 	
+	public String describe() {
+		String desc = "[JOUEUR] {NOM} = " + this.getName();
+		return desc;
+	}
+	
+	@Override
+	public String toString() {
+		return this.describe();
+	}
+	
 }

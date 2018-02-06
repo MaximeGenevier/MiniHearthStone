@@ -69,7 +69,8 @@ public abstract class Carte {
 	}
 	
 	public String describe() {
-		String desc = "[CARTE]\n\t{NOM} = " + this.getName() + "\t{COUT} = " + this.getManaCost();
+		String desc = this.getPlayer().toString() + "\n" + this.getPlayer().getHero().toString() 
+				+ "\n" + "[CARTE]\t{NOM} = " + this.getName() + "\n\t{COUT} = " + this.getManaCost();
 		return desc;
 	}
 	

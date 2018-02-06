@@ -13,7 +13,7 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
 public class Consecration extends Sort{
 
 	public Consecration(Joueur player) {
-		super("ConsÃ©cration", 4, player);
+		super("Consécration", 4, player);
 	}
 
 }

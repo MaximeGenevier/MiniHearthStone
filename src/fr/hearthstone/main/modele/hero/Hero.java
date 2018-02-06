@@ -11,7 +11,11 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.competence.Competence;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Classe correspondant au héro générique avec un nom, des pv actuels, pv max,
+ * le mana actuel et max, son armure, les cartes que le hero peut posseder,
+ * et le joueur auquel il appartient
  *
  */
 public abstract class Hero implements Cible{
@@ -200,6 +204,17 @@ public abstract class Hero implements Cible{
 
 	public void addAvailableCardName(String name) {
 		this.availableCardsName.add(name);
+	}
+	
+	public String describe() {
+		String desc = "[HERO] {NOM} = " + this.getName() + "\n\t{VIE} = " + this.currentHealth + "/" + this.maxHealth 
+				+ "\t{MANA} = " + this.currentMana + "/" + this.maxMana + "\t{ARMURE} = " + this.armor;
+		return desc;
+	}
+	
+	@Override
+	public String toString() {
+		return this.describe();
 	}
 	
 }

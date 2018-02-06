@@ -24,7 +24,7 @@ public class VolDeVie extends ServiteurDecorator{
 
 	@Override
 	public String describe() {
-		String desc = serviteur.describe() + "\t{CAPACITE} = " + " Vol de vie";
+		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Vol de vie";
 		return desc;
 	}
 	

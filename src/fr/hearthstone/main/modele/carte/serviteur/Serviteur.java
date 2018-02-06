@@ -27,6 +27,7 @@ public abstract class Serviteur extends Carte implements Cible{
 			this.currentHealth -= damageAmount;
 			return false;
 		}else {
+			this.currentHealth = 0;
 			System.out.println(this.getName() + " die.");
 			return true;
 		}
@@ -123,7 +124,20 @@ public abstract class Serviteur extends Carte implements Cible{
 	
 	@Override
 	public String describe() {
-		String desc = super.describe() + "\t{ATTAQUE} = " + this.getAttack() + "\t{VIE} = " + this.getCurrentHealth();
+		String peutAttaquer = "Faux";
+		String doitEtreAttaquer = "Faux";
+		
+		if(this.canAttack == true) {
+			peutAttaquer = "Vrai";
+		}
+		
+		if(this.shouldBeAttack == true) {
+			doitEtreAttaquer = "Vrai";
+		}
+		
+		String desc = super.describe() + "\t{ATTAQUE} = " + this.getAttack() + "\t{VIE} = " + this.getCurrentHealth()
+			+ "\n\t{PEUT ATTAQUER} = " + peutAttaquer + "\t{DOIT ETRE ATTAQUE} = " + doitEtreAttaquer;
+		
 		return desc;
 	}
 	

@@ -13,6 +13,7 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 public class ChampionFrisselame extends Serviteur{
 
 	public ChampionFrisselame(Joueur player) {
+		this.player = player;
 		this.name = "Champion frisselame";
 		this.manaCost = 4;
 		this.maxHealth = 2;
@@ -20,7 +21,6 @@ public class ChampionFrisselame extends Serviteur{
 		this.attack = 3;
 		this.canAttack = false;
 		this.shouldBeAttack = false;
-		this.player = player;
 	}
 
 }

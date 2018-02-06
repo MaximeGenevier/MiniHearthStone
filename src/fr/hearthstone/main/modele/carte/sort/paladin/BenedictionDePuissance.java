@@ -13,7 +13,7 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
 public class BenedictionDePuissance extends Sort{
 
 	public BenedictionDePuissance(Joueur player) {
-		super("BÃ©nÃ©diction de puissance", 1, player);
+		super("Bénédiction de puissance", 1, player);
 	}
 
 }

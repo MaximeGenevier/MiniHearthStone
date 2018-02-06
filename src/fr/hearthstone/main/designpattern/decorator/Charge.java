@@ -24,7 +24,7 @@ public class Charge extends ServiteurDecorator{
 	
 	@Override
 	public String describe() {
-		String desc = serviteur.describe() + "\t{CAPACITE} = " + " Charge";
+		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Charge";
 		return desc;
 	}
 	

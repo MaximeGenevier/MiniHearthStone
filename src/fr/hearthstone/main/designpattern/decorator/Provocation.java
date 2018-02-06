@@ -24,7 +24,7 @@ public class Provocation extends ServiteurDecorator{
 	
 	@Override
 	public String describe() {
-		String desc = serviteur.describe() + "\t{CAPACITE} = " + " Provocation";
+		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Provocation";
 		return desc;
 	}
 	
