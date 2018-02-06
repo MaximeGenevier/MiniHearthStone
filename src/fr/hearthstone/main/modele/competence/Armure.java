@@ -10,7 +10,7 @@ public class Armure extends Competence{
 	}
 	
 	public void useAbility(){
+		this.abilityUsed();
 		this.hero.increaseArmor(this.armorAmount);
-		//this.disableAbility;
 	}
 }

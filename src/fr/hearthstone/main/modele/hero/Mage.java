@@ -5,6 +5,7 @@ package fr.hearthstone.main.modele.hero;
 
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
+import fr.hearthstone.main.modele.competence.BouleDeFeu;
 
 /**
  * @author Maxime
@@ -14,6 +15,7 @@ public class Mage extends Hero{
 
 	public Mage(Joueur player) {
 		super("Mage", player);
+		this.ability = new BouleDeFeu(this);
 		this.addAvailableCardName("Mouton");
 		this.addAvailableCardName("Reflet");
 		this.addAvailableCardName("ExplosionDesArcanes");

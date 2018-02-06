@@ -5,6 +5,7 @@ package fr.hearthstone.main.modele.hero;
 
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
+import fr.hearthstone.main.modele.competence.Renfort;
 
 /**
  * @author Maxime
@@ -14,6 +15,7 @@ public class Paladin extends Hero{
 
 	public Paladin(Joueur player) {
 		super("Paladin", player);
+		this.ability = new Renfort(this);
 		this.addAvailableCardName("ChampionFrisselame");
 		this.addAvailableCardName("RecrueDeLaMainDArgent");
 		this.addAvailableCardName("BenedictionDePuissance");

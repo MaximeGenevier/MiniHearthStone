@@ -12,17 +12,16 @@ public class BouleDeFeu extends Competence{
 	
 	public void useAbility(Cible target){
 		if(this.hero.getCurrentMana() >= this.abilityCost){
+			this.abilityUsed();
 			this.hero.decreaseArmor(this.abilityCost);
 			target.beAttacked(this.damageAmount);
-			//this.disableAbility();
 		}else{
-			System.out.println("Can't used this now");
+			System.out.println("Pas assez de mana");
 		}
 	}
 
 	@Override
 	public void useAbility() {
-		// TODO Auto-generated method stub
 		
 	}
 }

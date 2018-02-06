@@ -3,17 +3,14 @@ package fr.hearthstone.test.modele.carte;
 import org.junit.Test;
 
 import fr.hearthstone.main.designpattern.factory.CarteFactory;
-import fr.hearthstone.main.designpattern.factory.CarteGuerrierFactory;
 import fr.hearthstone.main.designpattern.factory.CarteMageFactory;
 import fr.hearthstone.main.designpattern.factory.CartePaladinFactory;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
-import fr.hearthstone.main.modele.hero.Guerrier;
 import fr.hearthstone.main.modele.hero.Hero;
 import fr.hearthstone.main.modele.hero.Mage;
 import fr.hearthstone.main.modele.hero.Paladin;
-import sun.security.provider.DSAPublicKeyImpl;
 
 public class ServiteurTest {
 

@@ -40,6 +40,7 @@ public abstract class Hero implements Cible{
 		this.armor = 0;
 		this.player = player;
 		this.availableCardsName = new ArrayList<String>();
+		
 		// Cette liste est utilisée pour tirer une carte aléatoirement
 		// dans la méthode drawCard()
 		// Est remplie ici avec les cartes communes
@@ -206,6 +207,34 @@ public abstract class Hero implements Cible{
 		this.availableCardsName.add(name);
 	}
 	
+	/**
+	 * @return the player
+	 */
+	public Joueur getPlayer() {
+		return player;
+	}
+
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Joueur player) {
+		this.player = player;
+	}
+
+	/**
+	 * @return the ability
+	 */
+	public Competence getAbility() {
+		return ability;
+	}
+
+	/**
+	 * @param ability the ability to set
+	 */
+	public void setAbility(Competence ability) {
+		this.ability = ability;
+	}
+
 	public String describe() {
 		String desc = "[HERO] {NOM} = " + this.getName() + "\n\t{VIE} = " + this.currentHealth + "/" + this.maxHealth 
 				+ "\t{MANA} = " + this.currentMana + "/" + this.maxMana + "\t{ARMURE} = " + this.armor;
