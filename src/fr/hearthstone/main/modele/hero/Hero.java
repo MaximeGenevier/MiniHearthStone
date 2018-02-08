@@ -6,6 +6,8 @@ package fr.hearthstone.main.modele.hero;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hearthstone.main.designpattern.observer.HeroObserver;
+import fr.hearthstone.main.designpattern.observer.Sujet;
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.competence.Competence;
@@ -13,12 +15,12 @@ import fr.hearthstone.main.modele.competence.Competence;
 /**
  * @author Maxime GENEVIER
  * 
- * Classe correspondant au héro générique avec un nom, des pv actuels, pv max,
+ * Classe correspondant au hÃ©ro gÃ©nÃ©rique avec un nom, des pv actuels, pv max,
  * le mana actuel et max, son armure, les cartes que le hero peut posseder,
  * et le joueur auquel il appartient
  *
  */
-public abstract class Hero implements Cible{
+public abstract class Hero implements Cible, Sujet{
 	
 	protected String name;
 	protected Competence ability;
@@ -29,6 +31,7 @@ public abstract class Hero implements Cible{
 	protected int armor;
 	protected List<String> availableCardsName;
 	protected Joueur player;
+	protected ArrayList<HeroObserver> observers;
 	
 	public Hero(String name, Joueur player) {
 		super();
@@ -39,10 +42,11 @@ public abstract class Hero implements Cible{
 		this.currentMana = this.maxMana;
 		this.armor = 0;
 		this.player = player;
+		this.observers = new ArrayList<>();
 		this.availableCardsName = new ArrayList<String>();
 		
-		// Cette liste est utilisée pour tirer une carte aléatoirement
-		// dans la méthode drawCard()
+		// Cette liste est utilisï¿½e pour tirer une carte alï¿½atoirement
+		// dans la mï¿½thode drawCard()
 		// Est remplie ici avec les cartes communes
 		this.addAvailableCardName("ChefDeRaid");
 		this.addAvailableCardName("ChevaucheurDeLoup");
@@ -57,21 +61,26 @@ public abstract class Hero implements Cible{
 			this.currentHealth -= this.decreaseArmor(damageAmount);
 			if(this.currentHealth < 0) {
 				displayOnScreen("Hero die");
+				setHeroStatistics();
 				return true;
 			}else {
 				displayOnScreen("Hero still alive");
+				setHeroStatistics();
 				return false;
 			}
 		}else {
 			if(this.currentHealth > damageAmount) {
 				this.currentHealth -= damageAmount;
 				displayOnScreen("Hero still alive");
+				setHeroStatistics();
 				return false;
 			}else {
 				displayOnScreen("Hero die");
+				setHeroStatistics();
 				return true;
 			}
 		}
+		
 	}
 	
 	public void beHealed(int healAmount) {
@@ -79,11 +88,13 @@ public abstract class Hero implements Cible{
 		if(this.currentHealth > this.maxHealth) {
 			this.currentHealth = this.maxHealth;
 		}
+		setHeroStatistics();
 	}
 	
 	public void increaseArmor(int armorAmount) {
 		this.armor += armorAmount;
 		displayOnScreen("Armor amount : " + armor);
+		setHeroStatistics();
 	}
 	
 	/**
@@ -98,6 +109,7 @@ public abstract class Hero implements Cible{
 			this.armor = 0;
 		}
 		displayOnScreen("Remaining damage : " + Integer.toString(remainingDamage));
+		setHeroStatistics();
 		return remainingDamage;
 	}
 	
@@ -105,7 +117,26 @@ public abstract class Hero implements Cible{
 		this.maxMana++;
 		displayOnScreen("Max Mana: " + Integer.toString(this.maxMana));
 		this.currentMana = this.maxMana;
+		setHeroStatistics();
 		displayOnScreen("Current Mana : " + Integer.toString(this.currentMana));
+	}
+	
+	public void registerObs(HeroObserver obs) {
+		observers.add(obs);
+	}
+	
+	public void deleteObs(HeroObserver obs) {
+		observers.remove(obs);
+	}
+	
+	public void notifyObs() {
+		for(HeroObserver obs : observers) {
+			obs.actualize(currentHealth, currentMana, armor);
+		}
+	}
+	
+	public void setHeroStatistics() {
+		notifyObs();
 	}
 	
 	private void displayOnScreen(String message) {
