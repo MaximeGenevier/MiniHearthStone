@@ -13,7 +13,7 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 public class SoldatDuComteDeLOr extends Serviteur{
 
 	public SoldatDuComteDeLOr(Joueur player) {
-		this.name = "Soldat du comté de l'or";
+		this.name = "Soldat du comtÃ© de l'or";
 		this.manaCost = 1;
 		this.maxHealth = 2;
 		this.currentHealth = this.maxHealth;

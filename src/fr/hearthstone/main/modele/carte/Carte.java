@@ -72,7 +72,7 @@ public abstract class Carte {
 	
 	public String describe() {
 		String desc = "[CARTE]\t{NOM} = " + this.getName() + "\n\t{COUT} = " + this.getManaCost() 
-			+ "\n\t{DESCRIPTION} = " + this.description ;
+			+ "\t{DESCRIPTION} = " + this.description + "\n";
 		return desc;
 	}
 	

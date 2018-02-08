@@ -23,7 +23,7 @@ public class AffichageVieHero implements HeroObserver, HeroAffichage{
 	
 	@Override
 	public void print() {
-		System.out.println("[HERO]" + ((Hero)hero).getName() + "{VIE} : " + heroCurrentHealth
+		System.out.println("[HERO]" + ((Hero)hero).getName() + "\n\t{VIE} : " + heroCurrentHealth
 				+ " {MANA} : " + heroCurrentMana + " {ARMURE} : " + heroCurrentArmor);
 	}
 

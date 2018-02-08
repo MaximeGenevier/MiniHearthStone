@@ -41,8 +41,10 @@ public class Joueur {
 	
 	public void playCard(Carte card) {
 		if(this.playedCards.size() < 5) {
-			this.playedCards.add(card);
-			this.cardsInHand.remove(card);
+			if(this.getHero().useMana(card.getManaCost())) {
+				this.playedCards.add(card);
+				this.cardsInHand.remove(card);
+			}
 		} else {
 			System.out.println("Vous ne pouvez pas jouer plus de serviteur.");
 		}

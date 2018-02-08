@@ -12,7 +12,7 @@ public class EtatIndisponible implements CompetenceState{
 
 	@Override
 	public void abilityUsed() {
-		System.out.println("You could not do it now.");
+		System.out.println("Vous avez déjà utilisé votre compétence.");
 	}
 
 	@Override

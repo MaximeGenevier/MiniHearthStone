@@ -1,7 +1,6 @@
 package fr.hearthstone.main.modele.competence;
 
-import fr.hearthstone.main.designpattern.factory.CarteFactory;
-import fr.hearthstone.main.designpattern.factory.CartePaladinFactory;
+import fr.hearthstone.main.designpattern.state.EtatDisponible;
 import fr.hearthstone.main.modele.hero.Paladin;
 
 public class Renfort extends Competence{
@@ -10,7 +9,13 @@ public class Renfort extends Competence{
 	}
 	
 	public void useAbility(){
-		this.abilityUsed();
-		this.hero.getPlayer().playSpecialCard("RecrueDeLaMainDArgent");
+		if(this.getState().getClass().equals(EtatDisponible.class)) {
+			if(this.hero.getCurrentMana() >= this.abilityCost){
+				this.abilityUsed();
+				this.hero.getPlayer().playSpecialCard("RecrueDeLaMainDArgent");
+			}else{
+				System.out.println("Vous n'avez pas assez de mana");
+			}
+		}
 	}
 }

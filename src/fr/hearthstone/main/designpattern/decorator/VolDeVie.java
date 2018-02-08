@@ -18,8 +18,10 @@ public class VolDeVie extends ServiteurDecorator{
 	
 	@Override
 	public void attack(Cible target) {
-		serviteur.attack(target);
-		serviteur.getPlayer().getHero().beHealed(serviteur.getAttack());
+		if(this.canAttack) {
+			serviteur.attack(target);
+			serviteur.getPlayer().getHero().beHealed(serviteur.getAttack());
+		}
 	}
 
 	@Override

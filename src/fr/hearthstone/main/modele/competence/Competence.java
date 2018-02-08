@@ -42,4 +42,13 @@ public abstract class Competence{
 	}
 	
 	public abstract void useAbility();
+
+	public CompetenceState getState() {
+		return state;
+	}
+
+	public void setState(CompetenceState state) {
+		this.state = state;
+	}
+	
 }

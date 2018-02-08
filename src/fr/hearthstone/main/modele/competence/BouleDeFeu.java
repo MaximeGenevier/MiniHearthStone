@@ -1,5 +1,6 @@
 package fr.hearthstone.main.modele.competence;
 
+import fr.hearthstone.main.designpattern.state.EtatDisponible;
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.hero.Mage;
 
@@ -11,12 +12,14 @@ public class BouleDeFeu extends Competence{
 	}
 	
 	public void useAbility(Cible target){
-		if(this.hero.getCurrentMana() >= this.abilityCost){
-			this.abilityUsed();
-			this.hero.decreaseArmor(this.abilityCost);
-			target.beAttacked(this.damageAmount);
-		}else{
-			System.out.println("Pas assez de mana");
+		if(this.getState().getClass().equals(EtatDisponible.class)) {
+			if(this.hero.getCurrentMana() >= this.abilityCost){
+				this.abilityUsed();
+				this.hero.decreaseArmor(this.abilityCost);
+				target.beAttacked(this.damageAmount);
+			}else{
+				System.out.println("Vous n'avez pas assez de mana");
+			}
 		}
 	}
 

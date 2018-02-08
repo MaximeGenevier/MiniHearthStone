@@ -17,6 +17,6 @@ public class EtatDisponible implements CompetenceState{
 
 	@Override
 	public void abilityReloaded() {
-		System.out.println("You already could use it.");
+		System.out.println("Compétence disponible.");
 	}
 }
