@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
+import fr.hearthstone.main.modele.carte.sort.Sort;
 import fr.hearthstone.main.modele.hero.Hero;
 
 public class Joueur {
@@ -44,8 +45,8 @@ public class Joueur {
 		if(this.playedCards.size() < 5) {
 			if(this.getHero().useMana(card.getManaCost())) {
 				this.playedCards.add(card);
-				((Serviteur)card).proceed();
 				this.cardsInHand.remove(card);
+				((Serviteur)card).proceed();
 			}
 		} else {
 			System.out.println("Vous ne pouvez pas jouer plus de serviteur.");
@@ -194,7 +195,7 @@ public class Joueur {
 				System.out.println(((Serviteur)card).describe());
 			}
 		}else {
-			System.out.println("0. " + this.getHero().describe());
+			System.out.println("1. " + this.getHero().describe());
 			this.displayPlayedCards();
 		}
 	}

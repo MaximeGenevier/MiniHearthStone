@@ -10,11 +10,11 @@ public class Renfort extends Competence{
 	
 	public void useAbility(){
 		if(this.getState().getClass().equals(EtatDisponible.class)) {
-			if(this.hero.getCurrentMana() >= this.abilityCost){
+			if(this.hero.useMana(this.abilityCost)){
 				this.abilityUsed();
 				this.hero.getPlayer().playSpecialCard("RecrueDeLaMainDArgent");
 			}else{
-				System.out.println("Vous n'avez pas assez de mana");
+				System.out.println("Vous n'avez pas assez de mana.");
 			}
 		}
 	}

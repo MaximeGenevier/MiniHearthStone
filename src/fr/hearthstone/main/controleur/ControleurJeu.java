@@ -5,10 +5,11 @@ package fr.hearthstone.main.controleur;
 
 import java.util.Scanner;
 
+import fr.hearthstone.main.designpattern.state.EtatDisponible;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
-import fr.hearthstone.main.modele.competence.BouleDeFeu;
+import fr.hearthstone.main.modele.carte.sort.Sort;
 import fr.hearthstone.main.modele.hero.Mage;
 
 /**
@@ -35,21 +36,21 @@ public class ControleurJeu {
 		if(random == 0) {
 			System.out.println(playerOne.toString());
 			playerOne.setShouldPlay(true);
-			for(int i = 0; i < 4; i++) {
+			for(int i = 0; i < 3; i++) {
 				playerOne.drawCard();
 			}
 			System.out.println(playerTwo.toString());
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < 4; i++) {
 				playerTwo.drawCard();
 			}			
 		}else {
 			System.out.println(playerTwo.toString());
 			playerTwo.setShouldPlay(true);
-			for(int i = 0; i < 4; i++) {
+			for(int i = 0; i < 3; i++) {
 				playerTwo.drawCard();
 			}
 			System.out.println(playerOne.toString());
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < 4; i++) {
 				playerOne.drawCard();
 			}
 		}
@@ -79,7 +80,7 @@ public class ControleurJeu {
 		System.out.println("A votre tour " + playerThatSPlaying.getName() + "!");
 		System.out.println(playerThatSPlaying.getHero());
 		while(playerThatSPlaying.getHero().getCurrentMana() > 0) {
-			System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Passer le tour");
+			System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
 			int choice = recoverPlayerChoice();
 			if(choice == 1) {
 				placeCard(playerThatSPlaying);
@@ -88,15 +89,21 @@ public class ControleurJeu {
 			}else if(choice == 3) {
 				playAbility(playerThatSPlaying);
 			}else if(choice == 4) {
+				System.out.println("Votre héro : ");
+				System.out.println(playerThatSPlaying.getHero().describe());
+				System.out.println("Votre main : \n");
+				playerThatSPlaying.displayCardsInHand();
+				System.out.println("Votre plateau : \n");
+				playerThatSPlaying.displayPlayedCards();								
+			}else if(choice == 5) {
 				break;
 			}
 		}
-		roundEnds();
+		roundEnds(playerThatSPlaying);
 	}
 	
-	private void roundEnds() {
-		playerOne.roundSEnd();
-		playerTwo.roundSEnd();
+	private void roundEnds(Joueur playerThatSPlaying) {
+		playerThatSPlaying.roundSEnd();
 		updatePlayerThatShouldPlay();
 	}
 	
@@ -105,7 +112,19 @@ public class ControleurJeu {
 		playerThatSPlaying.displayCardsInHand();
 		int choice = recoverPlayerChoice() - 1;
 		try {
-			playerThatSPlaying.playCard(playerThatSPlaying.getCardsInHand().get(choice));
+			try {
+				playerThatSPlaying.playCard(playerThatSPlaying.getCardsInHand().get(choice));
+			}catch(ClassCastException exc) {
+				Carte card = playerThatSPlaying.getPlayedCards().get(choice);
+				System.out.println("Choisissez la cible : ");
+				playerThatSPlaying.getEnemy().displayTargetable();
+				choice = recoverPlayerChoice() - 1;
+				try {
+					((Sort)card).useSpell(playerThatSPlaying.getEnemy().getTargetable().get(choice));
+				}catch(ArrayIndexOutOfBoundsException ex) {
+					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
+				}
+			}
 		}catch (ArrayIndexOutOfBoundsException exc) {
 			System.out.println("Vous devez choisir un nombre correspondant à l'un des indices de vos cartes.");
 		}
@@ -114,7 +133,7 @@ public class ControleurJeu {
 	private void playCard(Joueur playerThatSPlaying) {
 		System.out.println("Choisissez un serviteur : ");
 		playerThatSPlaying.displayPlayedCards();
-		int choice = recoverPlayerChoice();
+		int choice = recoverPlayerChoice() - 1;
 		try {
 			Carte card = playerThatSPlaying.getPlayedCards().get(choice);
 			System.out.println("Choisissez la cible : ");
@@ -132,13 +151,17 @@ public class ControleurJeu {
 	
 	private void playAbility(Joueur playerThatSPlaying) {
 		if(playerThatSPlaying.getHero().getClass().equals(Mage.class)) {
-			System.out.println("Choisissez la cible : ");
-			playerThatSPlaying.getEnemy().displayTargetable();
-			int choice = recoverPlayerChoice();
-			try {
-				playerThatSPlaying.getHero().getAbility().useAbility(playerThatSPlaying.getEnemy().getTargetable().get(choice));
-			}catch(ArrayIndexOutOfBoundsException exc) {
-				System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
+			if(playerThatSPlaying.getHero().getAbility().getState().getClass().equals(EtatDisponible.class)) {
+				System.out.println("Choisissez la cible : ");
+				playerThatSPlaying.getEnemy().displayTargetable();
+				int choice = recoverPlayerChoice();
+				try {
+					playerThatSPlaying.getHero().getAbility().useAbility(playerThatSPlaying.getEnemy().getTargetable().get(choice));
+				}catch(ArrayIndexOutOfBoundsException exc) {
+					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
+				}
+			}else {
+				System.out.println("Vous n'avez pas assez de mana.");
 			}
 		}else {
 			playerThatSPlaying.getHero().getAbility().useAbility();
