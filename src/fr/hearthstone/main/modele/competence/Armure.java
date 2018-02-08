@@ -6,7 +6,7 @@ import fr.hearthstone.main.modele.hero.Guerrier;
 public class Armure extends Competence{
 	private int armorAmount;
 	public Armure(Guerrier hero){
-		super("Armure", hero);
+		super("Armure", hero, "Confère 2 points d'armure au guerrier.");
 		armorAmount = 2;
 	}
 	

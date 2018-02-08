@@ -18,8 +18,6 @@ public class Mage extends Hero{
 		super("Mage", player);
 		this.ability = new BouleDeFeu(this);
 		this.factory = new CarteMageFactory();
-		this.addAvailableCardName("Mouton");
-		this.addAvailableCardName("Reflet");
 		this.addAvailableCardName("ExplosionDesArcanes");
 		this.addAvailableCardName("ImageMiroir");
 		this.addAvailableCardName("Metamorphose");

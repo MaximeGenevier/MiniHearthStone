@@ -2,7 +2,6 @@ package fr.hearthstone.main.modele;
 
 import java.util.ArrayList;
 
-import fr.hearthstone.main.designpattern.factory.CarteFactory;
 import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 import fr.hearthstone.main.modele.hero.Hero;
@@ -12,18 +11,20 @@ public class Joueur {
 	private String name;
 	private Hero hero;
 	private Joueur enemy;
+	private boolean shouldPlay;
 	private ArrayList<Carte> cardsInHand;
 	private ArrayList<Carte> playedCards;
 	
 	public Joueur(String name) {
 		this.name = name;
+		this.shouldPlay = false;
 		this.cardsInHand = new ArrayList<>();
 		this.playedCards = new ArrayList<>();
 	}
 	
 	public void drawCard() {
 		// Créé un nombre aléatoire compris entre l'indice 0 et la taille maximum de la liste
-		int random = 0 + (int)(Math.random() * ((this.getHero().getAvailableCardsName().size() - 0)));
+		int random = 0 + (int)(Math.random() * ((this.getHero().getAvailableCardsName().size())));
 		// Ajoute la carte créée avec la fabrique
 		Carte card = this.getHero().getFactory().drawCard(this.getHero().getAvailableCardsName().get(random), this);
 		System.out.println("Vous piochez : \n" + card.describe());
@@ -43,6 +44,7 @@ public class Joueur {
 		if(this.playedCards.size() < 5) {
 			if(this.getHero().useMana(card.getManaCost())) {
 				this.playedCards.add(card);
+				((Serviteur)card).proceed();
 				this.cardsInHand.remove(card);
 			}
 		} else {
@@ -56,6 +58,45 @@ public class Joueur {
 	
 	public void removePlayedCard(Carte card) {
 		this.getPlayedCards().remove(card);
+	}
+	
+	public void roundSEnd() {
+		if(this.getPlayedCards().size() != 0) {
+			for(Carte card : this.getPlayedCards()) {
+				((Serviteur) card).setCanAttack(true);
+			}
+		}
+		this.getHero().increaseMaxMana();
+		this.getHero().getAbility().abilityReloaded();
+	}
+	
+	private ArrayList<Carte> getTanks() {
+		ArrayList<Carte> tanksMinions = new ArrayList<>();
+		for(Carte card : playedCards) {
+			if(((Serviteur)card).isShouldBeAttack()) {
+				tanksMinions.add(card);
+			}
+		}
+		return tanksMinions;
+	}
+	
+	public ArrayList<Cible> getTargetable(){
+		ArrayList<Cible> targetables = new ArrayList<>();
+		ArrayList<Carte> shouldBeTargetCards = getTanks();
+		
+		if(shouldBeTargetCards.size() > 0) {
+			for (Carte carte : shouldBeTargetCards) {
+				Serviteur target = ((Serviteur)carte);
+				targetables.add(target);
+			}
+		}else {
+			targetables.add(this.getHero());
+			for (Carte carte : playedCards) {
+				Serviteur target = ((Serviteur)carte);
+				targetables.add(target);
+			}
+		}
+		return targetables;
 	}
 
 	/**
@@ -92,6 +133,14 @@ public class Joueur {
 
 	public void setEnemy(Joueur enemy) {
 		this.enemy = enemy;
+	}
+	
+	public boolean isShouldPlay() {
+		return shouldPlay;
+	}
+
+	public void setShouldPlay(boolean shouldPlay) {
+		this.shouldPlay = shouldPlay;
 	}
 
 	/**
@@ -133,12 +182,20 @@ public class Joueur {
 		int i = 1;
 		for(Carte card : playedCards) {
 			System.out.println(i + ". ");
-			if(card.getClass().isAssignableFrom(Serviteur.class)) {
-				System.out.println(((Serviteur)card).describe());
-			}else {
-				System.out.println(card.describe());
-			}
+			System.out.println(((Serviteur)card).describe());
 			i++;
+		}
+	}
+	
+	public void displayTargetable() {
+		ArrayList<Carte> targetablesCards = getTanks();
+		if(targetablesCards.size() > 0) {
+			for(Carte card : targetablesCards) {
+				System.out.println(((Serviteur)card).describe());
+			}
+		}else {
+			System.out.println("0. " + this.getHero().describe());
+			this.displayPlayedCards();
 		}
 	}
 

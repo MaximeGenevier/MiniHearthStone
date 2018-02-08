@@ -1,6 +1,7 @@
 package fr.hearthstone.main.modele.carte.serviteur.commun;
 
 import fr.hearthstone.main.modele.Joueur;
+import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 public class ChefDeRaid extends Serviteur{
@@ -14,6 +15,13 @@ public class ChefDeRaid extends Serviteur{
 		this.canAttack = false;
 		this.shouldBeAttack = false;
 		this.player = player;
+	}
+
+	@Override
+	public void proceed() {
+		for(Carte card : this.getPlayer().getCardsInHand()) {
+			((Serviteur)card).increaseAttack(1);
+		}
 	}
 
 }

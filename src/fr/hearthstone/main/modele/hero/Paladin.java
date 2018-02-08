@@ -19,7 +19,6 @@ public class Paladin extends Hero{
 		this.ability = new Renfort(this);
 		this.factory = new CartePaladinFactory();
 		this.addAvailableCardName("ChampionFrisselame");
-		this.addAvailableCardName("RecrueDeLaMainDArgent");
 		this.addAvailableCardName("BenedictionDePuissance");
 		this.addAvailableCardName("Consecration");
 	}

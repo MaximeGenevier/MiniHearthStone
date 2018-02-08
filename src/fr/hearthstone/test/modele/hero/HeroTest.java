@@ -14,6 +14,10 @@ public class HeroTest {
 	@Test
 	public void heroMethodsTest() {
 		
+		for(int i = 0; i < 30; i++) {
+			int random = 0 + (int)(Math.random() * 2);
+			System.out.println(random);
+		}
 	}
 
 }

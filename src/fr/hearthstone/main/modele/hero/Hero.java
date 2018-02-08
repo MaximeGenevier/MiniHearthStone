@@ -270,7 +270,8 @@ public abstract class Hero implements Cible, Sujet{
 
 	public String describe() {
 		String desc = "[HERO] {NOM} = " + this.getName() + "\n\t{VIE} = " + this.currentHealth + "/" + this.maxHealth 
-				+ "\t{MANA} = " + this.currentMana + "/" + this.maxMana + "\t{ARMURE} = " + this.armor;
+				+ "\t{MANA} = " + this.currentMana + "/" + this.maxMana + "\t{ARMURE} = " + this.armor
+				+ "\n" + this.ability.describe();
 		return desc;
 	}
 	

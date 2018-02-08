@@ -5,7 +5,7 @@ import fr.hearthstone.main.modele.hero.Paladin;
 
 public class Renfort extends Competence{
 	public Renfort(Paladin hero){
-		super("Renfort", hero);
+		super("Renfort", hero, "Invoque un serviteur Recrue de la Main d’argent 1/1.");
 	}
 	
 	public void useAbility(){

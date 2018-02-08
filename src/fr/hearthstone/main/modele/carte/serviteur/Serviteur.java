@@ -27,10 +27,21 @@ public abstract class Serviteur extends Carte implements Cible{
 		}
 	}
 	
+	public void proceed() {
+		// Implémentée lorsqu'une carte à un effet spécial sur le terrain lorsqu'elle 
+		// est invoquée
+	}
+	
+	public void die() {
+		this.getPlayer().removePlayedCard(this);
+	}
+	
 	public boolean beAttacked(int damageAmount) {
 		this.currentHealth -= damageAmount;
 		if(this.currentHealth <= 0) {
 			this.currentHealth = 0;
+			System.out.println(this.getName() + " meurt.");
+			this.die();
 			return true;
 		}
 		return false;
