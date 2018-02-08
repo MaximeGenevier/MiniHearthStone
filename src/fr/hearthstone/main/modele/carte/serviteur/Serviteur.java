@@ -19,18 +19,21 @@ public abstract class Serviteur extends Carte implements Cible{
 	protected boolean canAttack;
 	
 	public void attack(Cible target) {
-		target.beAttacked(this.attack);
+		if(this.canAttack) {
+			target.beAttacked(this.attack);
+			this.canAttack = false;
+		}else {
+			System.out.println("Ce serviteur ne peut pas encore attaquer.");
+		}
 	}
 	
 	public boolean beAttacked(int damageAmount) {
-		if(this.currentHealth > damageAmount) {
-			this.currentHealth -= damageAmount;
-			return false;
-		}else {
+		this.currentHealth -= damageAmount;
+		if(this.currentHealth <= 0) {
 			this.currentHealth = 0;
-			System.out.println(this.getName() + " die.");
 			return true;
 		}
+		return false;
 	}
 	
 	public void beHealed(int healAmount) {
@@ -45,6 +48,10 @@ public abstract class Serviteur extends Carte implements Cible{
 	
 	public void increaseAttack(int increaseAmount) {
 		this.attack += increaseAmount;
+	}
+	
+	public void decreaseAttack(int decreaseAmount) {
+		this.attack -= decreaseAmount;
 	}
 	
 	public void increaseMaxHealth(int increaseAmount) {

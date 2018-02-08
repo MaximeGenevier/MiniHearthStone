@@ -11,7 +11,6 @@ public class Renfort extends Competence{
 	
 	public void useAbility(){
 		this.abilityUsed();
-		CarteFactory factory = new CartePaladinFactory();
-		factory.drawCard("RecrueDeLaMainDArgent", this.hero.getPlayer());
+		this.hero.getPlayer().playSpecialCard("RecrueDeLaMainDArgent");
 	}
 }

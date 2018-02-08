@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.hero;
 
+import fr.hearthstone.main.designpattern.factory.CarteGuerrierFactory;
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.competence.Armure;
@@ -16,6 +17,7 @@ public class Guerrier extends Hero{
 	public Guerrier(Joueur player) {
 		super("Guerrier", player);
 		this.ability = new Armure(this);
+		this.factory = new CarteGuerrierFactory();
 		this.addAvailableCardName("AvocatCommisDOffice");
 		this.addAvailableCardName("MaitriseDuBlocage");
 		this.addAvailableCardName("Tourbillon");

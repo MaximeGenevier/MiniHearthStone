@@ -12,6 +12,7 @@ import fr.hearthstone.main.modele.Joueur;
 public abstract class Carte {
 
 	protected String name;
+	protected String description;
 	protected int manaCost;
 	protected Joueur player;
 	
@@ -19,11 +20,12 @@ public abstract class Carte {
 		super();
 	}
 	
-	public Carte(String name, int manaCost, Joueur player) {
+	public Carte(String name, int manaCost, Joueur player, String description) {
 		super();
 		this.name = name;
 		this.manaCost = manaCost;
 		this.player = player;
+		this.description = description;
 	}
 
 	/**
@@ -69,14 +71,15 @@ public abstract class Carte {
 	}
 	
 	public String describe() {
-		String desc = this.getPlayer().toString() + "\n" + this.getPlayer().getHero().toString() 
-				+ "\n" + "[CARTE]\t{NOM} = " + this.getName() + "\n\t{COUT} = " + this.getManaCost();
+		String desc = "[CARTE]\t{NOM} = " + this.getName() + "\n\t{COUT} = " + this.getManaCost() 
+			+ "\n\t{DESCRIPTION} = " + this.description ;
 		return desc;
 	}
 	
 	@Override
 	public String toString() {
-		return this.describe();
+		return this.getPlayer().toString() + "\n" + this.getPlayer().getHero().toString() 
+				+ "\n" + this.describe();
 	}
 	
 }

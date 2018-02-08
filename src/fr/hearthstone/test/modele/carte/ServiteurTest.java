@@ -64,18 +64,10 @@ public class ServiteurTest {
 		CarteFactory factoryJ1 = new CartePaladinFactory();
 		CarteFactory factoryJ2 = new CarteMageFactory();
 
-		Carte carteJ1 = joueur1.drawCard(factoryJ1);
-		Carte carteJ2 = joueur2.drawCard(factoryJ2);
-		System.out.println("BEFOR ANYTHING");
-		displayCard(carteJ1);
-		displayCard(carteJ2);
-		for (int i = 0; i < 5; i++) {
-			System.out.println("BEFORE ATTACK");
-			displayCard(carteJ2);
-			((Serviteur) carteJ1).attack(((Serviteur) carteJ2));
-			System.out.println("AFTER ATTACK");
-			displayCard(carteJ2);
+		for(int i = 0; i < 10; i++) {
+			joueur1.drawCard(factoryJ1);
 		}
+		joueur1.displayCardsInHand();
 	}
 
 	private void displayCard(Carte card) {

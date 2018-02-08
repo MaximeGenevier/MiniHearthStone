@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.carte.sort;
 
+import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.Carte;
 
@@ -11,10 +12,12 @@ import fr.hearthstone.main.modele.carte.Carte;
  *
  */
 public abstract class Sort extends Carte{
-
-	public Sort(String name, int manaCost, Joueur player) {
-		super(name, manaCost, player);
+	
+	public Sort(String name, int manaCost, Joueur player, String description) {
+		super(name, manaCost, player, description);
 	}
+	
+	public abstract void useSpell(Cible target);
 	
 	@Override
 	public String toString() {

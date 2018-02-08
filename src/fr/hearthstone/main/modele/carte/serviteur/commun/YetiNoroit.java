@@ -13,7 +13,7 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 public class YetiNoroit extends Serviteur{
 
 	public YetiNoroit(Joueur player) {
-		this.name = "Yéti noroit";
+		this.name = "YÃ©ti noroit";
 		this.manaCost = 4;
 		this.maxHealth = 5;
 		this.currentHealth = this.maxHealth;

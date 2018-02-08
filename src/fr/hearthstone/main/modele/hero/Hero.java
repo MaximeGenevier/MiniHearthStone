@@ -6,6 +6,7 @@ package fr.hearthstone.main.modele.hero;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hearthstone.main.designpattern.factory.CarteFactory;
 import fr.hearthstone.main.designpattern.observer.HeroObserver;
 import fr.hearthstone.main.designpattern.observer.Sujet;
 import fr.hearthstone.main.modele.Cible;
@@ -29,6 +30,7 @@ public abstract class Hero implements Cible, Sujet{
 	protected int currentMana;
 	protected int maxMana;
 	protected int armor;
+	protected CarteFactory factory;
 	protected List<String> availableCardsName;
 	protected Joueur player;
 	protected ArrayList<HeroObserver> observers;
@@ -45,8 +47,8 @@ public abstract class Hero implements Cible, Sujet{
 		this.observers = new ArrayList<>();
 		this.availableCardsName = new ArrayList<String>();
 		
-		// Cette liste est utilis�e pour tirer une carte al�atoirement
-		// dans la m�thode drawCard()
+		// Cette liste est utilisée pour tirer une carte aléatoirement
+		// dans la méthode drawCard()
 		// Est remplie ici avec les cartes communes
 		this.addAvailableCardName("ChefDeRaid");
 		this.addAvailableCardName("ChevaucheurDeLoup");
@@ -56,31 +58,25 @@ public abstract class Hero implements Cible, Sujet{
 	}
 
 	public boolean beAttacked(int damageAmount) {
-		displayOnScreen("Current health: " + currentHealth + " Damage amount : " + damageAmount);
 		if(this.armor > 0) {
 			this.currentHealth -= this.decreaseArmor(damageAmount);
-			if(this.currentHealth < 0) {
-				displayOnScreen("Hero die");
+			if(this.currentHealth <= 0) {
+				this.currentHealth = 0;
 				setHeroStatistics();
 				return true;
-			}else {
-				displayOnScreen("Hero still alive");
-				setHeroStatistics();
-				return false;
 			}
+			setHeroStatistics();
+			return false;
 		}else {
-			if(this.currentHealth > damageAmount) {
-				this.currentHealth -= damageAmount;
-				displayOnScreen("Hero still alive");
-				setHeroStatistics();
-				return false;
-			}else {
-				displayOnScreen("Hero die");
+			this.currentHealth -= damageAmount;
+			if(this.currentHealth <= 0) {
+				this.currentHealth = 0;
 				setHeroStatistics();
 				return true;
 			}
+			setHeroStatistics();
+			return false;
 		}
-		
 	}
 	
 	public void beHealed(int healAmount) {
@@ -93,7 +89,6 @@ public abstract class Hero implements Cible, Sujet{
 	
 	public void increaseArmor(int armorAmount) {
 		this.armor += armorAmount;
-		displayOnScreen("Armor amount : " + armor);
 		setHeroStatistics();
 	}
 	
@@ -108,17 +103,24 @@ public abstract class Hero implements Cible, Sujet{
 			remainingDamage = this.armor;
 			this.armor = 0;
 		}
-		displayOnScreen("Remaining damage : " + Integer.toString(remainingDamage));
 		setHeroStatistics();
 		return remainingDamage;
 	}
 	
 	public void increaseMaxMana() {
 		this.maxMana++;
-		displayOnScreen("Max Mana: " + Integer.toString(this.maxMana));
 		this.currentMana = this.maxMana;
 		setHeroStatistics();
-		displayOnScreen("Current Mana : " + Integer.toString(this.currentMana));
+	}
+	
+	public boolean useMana(int manaCost) {
+		if(this.currentMana >= manaCost) {
+			this.currentHealth -= manaCost;
+			return true;
+		}else {
+			System.out.println("Vous n'avez pas assez de mana.");
+			return false;
+		}
 	}
 	
 	public void registerObs(HeroObserver obs) {
@@ -137,10 +139,6 @@ public abstract class Hero implements Cible, Sujet{
 	
 	public void setHeroStatistics() {
 		notifyObs();
-	}
-	
-	private void displayOnScreen(String message) {
-		System.out.println("Display : " + message);
 	}
 
 	/**
@@ -225,6 +223,10 @@ public abstract class Hero implements Cible, Sujet{
 	 */
 	public void setArmor(int armor) {
 		this.armor = armor;
+	}
+	
+	public CarteFactory getFactory() {
+		return factory;
 	}
 
 	/**

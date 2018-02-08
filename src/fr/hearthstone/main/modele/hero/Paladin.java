@@ -3,6 +3,7 @@
  */
 package fr.hearthstone.main.modele.hero;
 
+import fr.hearthstone.main.designpattern.factory.CartePaladinFactory;
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.competence.Renfort;
@@ -16,6 +17,7 @@ public class Paladin extends Hero{
 	public Paladin(Joueur player) {
 		super("Paladin", player);
 		this.ability = new Renfort(this);
+		this.factory = new CartePaladinFactory();
 		this.addAvailableCardName("ChampionFrisselame");
 		this.addAvailableCardName("RecrueDeLaMainDArgent");
 		this.addAvailableCardName("BenedictionDePuissance");
