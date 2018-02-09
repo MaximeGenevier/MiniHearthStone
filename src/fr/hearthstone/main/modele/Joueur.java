@@ -42,6 +42,7 @@ public class Joueur {
 	}
 	
 	public void playCard(Carte card) {
+		// update method to only use minion
 		if(this.playedCards.size() < 5) {
 			if(this.getHero().useMana(card.getManaCost())) {
 				this.playedCards.add(card);
@@ -51,6 +52,10 @@ public class Joueur {
 		} else {
 			System.out.println("Vous ne pouvez pas jouer plus de serviteur.");
 		}
+	}
+	
+	public void playSpell(Sort spell){
+		// use spell
 	}
 	
 	public void removeHandCard(Carte card) {
