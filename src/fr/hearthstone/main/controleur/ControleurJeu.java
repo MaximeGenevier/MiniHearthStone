@@ -5,6 +5,7 @@ package fr.hearthstone.main.controleur;
 
 import java.util.Scanner;
 
+import fr.hearthstone.main.designpattern.observer.AffichageVieHero;
 import fr.hearthstone.main.designpattern.state.EtatDisponible;
 import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
@@ -21,12 +22,21 @@ public class ControleurJeu {
 
 	private Joueur playerOne;
 	private Joueur playerTwo;
+	private AffichageVieHero displayPlayerOne;
+	private AffichageVieHero displayPlayerTwo;
 	private int	round;
 	private Scanner scanner;
 	
 	public ControleurJeu(Joueur pOne, Joueur pTwo) {
 		this.playerOne = pOne;
 		this.playerTwo = pTwo;
+		
+		displayPlayerOne = new AffichageVieHero(playerOne.getHero());
+		displayPlayerTwo = new AffichageVieHero(playerTwo.getHero());
+		
+		playerOne.getHero().registerObs(displayPlayerOne);
+		playerTwo.getHero().registerObs(displayPlayerTwo);
+		
 		this.round = 1;
 		scanner = new Scanner(System.in); // Scanner pour lire les choix de l'utilisateur
 		initGame();

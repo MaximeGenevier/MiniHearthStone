@@ -16,7 +16,6 @@ public class BouleDeFeu extends Competence{
 		if(this.getState().getClass().equals(EtatDisponible.class)) {
 			if(this.hero.useMana(this.abilityCost)){
 				this.abilityUsed();
-				this.hero.decreaseArmor(this.abilityCost);
 				target.beAttacked(this.damageAmount);
 			}else{
 				System.out.println("Vous n'avez pas assez de mana.");

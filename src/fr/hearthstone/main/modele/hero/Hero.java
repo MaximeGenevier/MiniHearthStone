@@ -115,7 +115,7 @@ public abstract class Hero implements Cible, Sujet{
 	
 	public boolean useMana(int manaCost) {
 		if(this.currentMana >= manaCost) {
-			this.currentHealth -= manaCost;
+			this.currentMana -= manaCost;
 			return true;
 		}else {
 			System.out.println("Vous n'avez pas assez de mana.");
