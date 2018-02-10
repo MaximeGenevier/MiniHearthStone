@@ -28,7 +28,6 @@ public class Consecration extends Sort{
 			for(Carte card : enemiesMinions) {
 				((Serviteur)card).beAttacked(2);
 			}
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

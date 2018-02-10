@@ -34,7 +34,6 @@ public class Tourbillon extends Sort{
 			for(Carte card : alliesMinions) {
 				((Serviteur)card).beAttacked(1);
 			}
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

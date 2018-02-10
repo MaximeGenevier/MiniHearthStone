@@ -22,7 +22,6 @@ public class MaitriseDuBlocage extends Sort{
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			this.getPlayer().getHero().increaseArmor(5);
 			this.getPlayer().drawCard();
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

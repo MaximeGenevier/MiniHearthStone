@@ -22,7 +22,6 @@ public class BenedictionDePuissance extends Sort{
 	public void useSpell(Cible target) {
 		if(this.getPlayer().getHero().useMana(this.getManaCost())){
 			((Serviteur)target).increaseAttack(3);
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

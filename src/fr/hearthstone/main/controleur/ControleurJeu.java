@@ -6,6 +6,7 @@ package fr.hearthstone.main.controleur;
 import java.util.Scanner;
 
 import fr.hearthstone.main.designpattern.state.EtatDisponible;
+import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.Carte;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
@@ -104,7 +105,9 @@ public class ControleurJeu {
 	
 	private void roundEnds(Joueur playerThatSPlaying) {
 		playerThatSPlaying.roundSEnd();
+		getPlayerWillPlayed().drawCard();
 		updatePlayerThatShouldPlay();
+
 	}
 	
 	private void placeCard(Joueur playerThatSPlaying) {
@@ -112,21 +115,20 @@ public class ControleurJeu {
 		playerThatSPlaying.displayCardsInHand();
 		int choice = recoverPlayerChoice() - 1;
 		try {
+			 
 			try {
-				playerThatSPlaying.playCard(playerThatSPlaying.getCardsInHand().get(choice));
+				Serviteur minion = (Serviteur)playerThatSPlaying.getCardsInHand().get(choice);
+				playerThatSPlaying.playMinion(minion);
 			}catch(ClassCastException exc) {
-				Carte card = playerThatSPlaying.getPlayedCards().get(choice);
+				Sort spell = (Sort)playerThatSPlaying.getCardsInHand().get(choice);
 				System.out.println("Choisissez la cible : ");
 				playerThatSPlaying.getEnemy().displayTargetable();
 				choice = recoverPlayerChoice() - 1;
-				try {
-					((Sort)card).useSpell(playerThatSPlaying.getEnemy().getTargetable().get(choice));
-				}catch(ArrayIndexOutOfBoundsException ex) {
-					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
-				}
+				Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice);
+				playerThatSPlaying.playSpell(spell, target);
 			}
 		}catch (ArrayIndexOutOfBoundsException exc) {
-			System.out.println("Vous devez choisir un nombre correspondant à l'un des indices de vos cartes.");
+			System.out.println("Vous devez choisir un nombre correspondant à l'un des indices.");
 		}
 	}
 	

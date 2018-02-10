@@ -72,12 +72,6 @@ public class ServiteurTest {
 		
 		joueur1.drawCard();
 		joueur1.displayCardsInHand();
-		int choice = 1;
-		Carte card = joueur1.getCardsInHand().get(choice-1);
-		joueur1.playCard(card);
-		choice = 1;
-		card = joueur1.getPlayedCards().get(choice-1);
-		((Serviteur)card).attack(joueur1.getEnemy().getHero());		
 		
 	}
 

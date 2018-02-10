@@ -28,7 +28,6 @@ public class ExplosionDesArcanes extends Sort{
 			for(Carte card : enemiesMinions) {
 				((Serviteur)card).beAttacked(1);
 			}
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

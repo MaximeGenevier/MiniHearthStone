@@ -22,7 +22,6 @@ public class ImageMiroir extends Sort{
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			this.getPlayer().playSpecialCard("Reflet");
 			this.getPlayer().playSpecialCard("Reflet");
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

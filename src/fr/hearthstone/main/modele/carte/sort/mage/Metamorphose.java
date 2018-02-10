@@ -23,7 +23,6 @@ public class Metamorphose extends Sort{
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			this.getPlayer().removePlayedCard(((Carte)target));
 			this.getPlayer().playSpecialCard("Mouton");
-			this.getPlayer().removeHandCard(this);
 		}
 	}
 

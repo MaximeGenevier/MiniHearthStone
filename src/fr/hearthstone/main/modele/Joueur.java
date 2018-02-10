@@ -41,21 +41,23 @@ public class Joueur {
 		}
 	}
 	
-	public void playCard(Carte card) {
+	public void playMinion(Serviteur minion) {
 		// update method to only use minion
 		if(this.playedCards.size() < 5) {
-			if(this.getHero().useMana(card.getManaCost())) {
-				this.playedCards.add(card);
-				this.cardsInHand.remove(card);
-				((Serviteur)card).proceed();
+			if(this.getHero().useMana(minion.getManaCost())) {
+				this.playedCards.add(minion);
+				this.cardsInHand.remove(minion);
+				minion.proceed();
 			}
 		} else {
 			System.out.println("Vous ne pouvez pas jouer plus de serviteur.");
 		}
 	}
 	
-	public void playSpell(Sort spell){
+	public void playSpell(Sort spell, Cible target){
 		// use spell
+		spell.useSpell(target);
+		this.cardsInHand.remove(spell);
 	}
 	
 	public void removeHandCard(Carte card) {
