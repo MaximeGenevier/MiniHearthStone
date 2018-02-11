@@ -23,7 +23,7 @@ public class MiniHearthstone {
 	 */
 	public static void main(String[] args) {
 
-		Joueur joueur1 = new Joueur("Arthas Menethil");
+		/*Joueur joueur1 = new Joueur("Arthas Menethil");
 		Joueur joueur2 = new Joueur("Antonidas");
 		
 		Hero paladin = new Paladin(joueur1);
@@ -33,14 +33,14 @@ public class MiniHearthstone {
 		joueur2.setHero(mage);
 		
 		joueur1.setEnemy(joueur2);
-		joueur2.setEnemy(joueur1);
+		joueur2.setEnemy(joueur1);*/
 		
-		// Joueur playerOne = selectHeroPlayer()
-		// Joueur playerTwo = selectHeroPlayer()
-		// playerOne.setEnemy(playerTwo);
-		// playerTwo.setEnemy(playerOne);
+		Joueur playerOne = selectHeroPlayer();
+		Joueur playerTwo = selectHeroPlayer();
+		playerOne.setEnemy(playerTwo);
+		playerTwo.setEnemy(playerOne);
 		
-		ControleurJeu controleur = new ControleurJeu(joueur1, joueur2);
+		ControleurJeu controleur = new ControleurJeu(playerOne, playerTwo);
 		controleur.gameBegins();
 		
 	}
@@ -76,7 +76,7 @@ public class MiniHearthstone {
 			if(scanner.hasNextInt()) {
 				choice = scanner.nextInt();
 			}else {
-				System.out.println("Choisissez une carte : ");
+				System.out.println("Choisissez un héro : ");
 				scanner.next();
 				continue;
 			}

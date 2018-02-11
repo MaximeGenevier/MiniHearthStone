@@ -166,7 +166,7 @@ public class ControleurJeu {
 			if(playerThatSPlaying.getHero().getAbility().getState().getClass().equals(EtatDisponible.class)) {
 				System.out.println("Choisissez la cible : ");
 				playerThatSPlaying.getEnemy().displayTargetable();
-				int choice = recoverPlayerChoice();
+				int choice = recoverPlayerChoice() - 1;
 				try {
 					playerThatSPlaying.getHero().getAbility().useAbility(playerThatSPlaying.getEnemy().getTargetable().get(choice));
 				}catch(ArrayIndexOutOfBoundsException exc) {

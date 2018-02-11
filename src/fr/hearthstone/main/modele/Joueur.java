@@ -198,14 +198,17 @@ public class Joueur {
 	}
 	
 	public void displayTargetable() {
-		ArrayList<Carte> targetablesCards = getTanks();
-		if(targetablesCards.size() > 0) {
-			for(Carte card : targetablesCards) {
-				System.out.println(((Serviteur)card).describe());
+		ArrayList<Cible> targetablesCards = getTargetable();
+		for(int i = 0; i < targetablesCards.size(); i++) {
+			try {
+				System.out.println((i + 1) + ".\n");
+				Carte card = (Carte)targetablesCards.get(i);
+				System.out.println(card.describe());
+			}catch(ClassCastException exc) {
+				System.out.println((i + 1) + ".\n");
+				Hero hero = (Hero)targetablesCards.get(i);
+				System.out.println(hero.describe());
 			}
-		}else {
-			System.out.println("1. " + this.getHero().describe());
-			this.displayPlayedCards();
 		}
 	}
 
