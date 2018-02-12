@@ -110,7 +110,6 @@ public abstract class Hero implements Cible, Sujet{
 	public void increaseMaxMana() {
 		this.maxMana++;
 		this.currentMana = this.maxMana;
-		setHeroStatistics();
 	}
 	
 	public boolean useMana(int manaCost) {
