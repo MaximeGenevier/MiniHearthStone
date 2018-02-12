@@ -54,18 +54,21 @@ public class MiniHearthstone {
 	private static Hero chooseHero(Joueur player) {
 		System.out.println("Choisissez un héro : \n1. Guerrier\n2. Mage\n3. Paladin");
 		int choice = recoverPlayerChoice();
+		while(choice != 1 && choice != 2 && choice != 3) {
+			System.out.println("Choisissez un héro : \n1. Guerrier\n2. Mage\n3. Paladin");
+			choice = recoverPlayerChoice();
+		}
 		if(choice == 1) {
 			player.setName("Aggramar le Vengeur");
 			return new Guerrier(player);
 		}else if(choice == 2) {
 			player.setName("Malygos le Lieur de Sorts");
 			return new Mage(player);
-		}else if(choice == 3) {
+		}else{
 			player.setName("Grand Exarque Turalyon");
 			return new Paladin(player);
-		}else {
-			return null;
 		}
+		
 	}
 	
 	private static int recoverPlayerChoice() {

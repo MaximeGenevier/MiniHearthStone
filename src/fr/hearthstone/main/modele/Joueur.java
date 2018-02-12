@@ -201,12 +201,12 @@ public class Joueur {
 		ArrayList<Cible> targetablesCards = getTargetable();
 		for(int i = 0; i < targetablesCards.size(); i++) {
 			try {
-				System.out.println((i + 1) + ".\n");
 				Carte card = (Carte)targetablesCards.get(i);
+				System.out.println((i + 1) + ".\n");
 				System.out.println(card.describe());
 			}catch(ClassCastException exc) {
-				System.out.println((i + 1) + ".\n");
 				Hero hero = (Hero)targetablesCards.get(i);
+				System.out.println((i + 1) + ".\n");
 				System.out.println(hero.describe());
 			}
 		}

@@ -90,9 +90,9 @@ public class ControleurJeu {
 		Joueur playerThatSPlaying = getPlayerThatShouldPlay();
 		System.out.println("A votre tour " + playerThatSPlaying.getName() + "!");
 		System.out.println(playerThatSPlaying.getHero());
-		while(playerThatSPlaying.getHero().getCurrentMana() > 0) {
-			System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
-			int choice = recoverPlayerChoice();
+		System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
+		int choice = recoverPlayerChoice();
+		while(choice != 5) {
 			if(choice == 1) {
 				placeCard(playerThatSPlaying);
 			}else if(choice == 2){
@@ -106,9 +106,11 @@ public class ControleurJeu {
 				playerThatSPlaying.displayCardsInHand();
 				System.out.println("Votre plateau : \n");
 				playerThatSPlaying.displayPlayedCards();								
-			}else if(choice == 5) {
-				break;
+			}else {
+				continue;
 			}
+			System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
+			choice = recoverPlayerChoice();
 		}
 		roundEnds(playerThatSPlaying);
 	}
@@ -121,43 +123,56 @@ public class ControleurJeu {
 	}
 	
 	private void placeCard(Joueur playerThatSPlaying) {
+		System.out.println("-1. Retour");
 		System.out.println("Choisissez une carte : ");
 		playerThatSPlaying.displayCardsInHand();
-		int choice = recoverPlayerChoice() - 1;
-		try {
-			 
+		int choice = recoverPlayerChoice();
+		while(choice != -1) {
 			try {
-				Serviteur minion = (Serviteur)playerThatSPlaying.getCardsInHand().get(choice);
-				playerThatSPlaying.playMinion(minion);
-			}catch(ClassCastException exc) {
-				Sort spell = (Sort)playerThatSPlaying.getCardsInHand().get(choice);
-				System.out.println("Choisissez la cible : ");
-				playerThatSPlaying.getEnemy().displayTargetable();
-				choice = recoverPlayerChoice() - 1;
-				Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice);
-				playerThatSPlaying.playSpell(spell, target);
+				try {
+					Serviteur minion = (Serviteur)playerThatSPlaying.getCardsInHand().get(choice-1);
+					playerThatSPlaying.playMinion(minion);
+				}catch(ClassCastException exc) {
+					Sort spell = (Sort)playerThatSPlaying.getCardsInHand().get(choice-1);
+					System.out.println("Choisissez la cible : ");
+					playerThatSPlaying.getEnemy().displayTargetable();
+					choice = recoverPlayerChoice() - 1;
+					Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice-1);
+					playerThatSPlaying.playSpell(spell, target);
+				}
+			}catch (ArrayIndexOutOfBoundsException exc) {
+				System.out.println("Vous devez choisir un nombre correspondant à l'un des indices.");
 			}
-		}catch (ArrayIndexOutOfBoundsException exc) {
-			System.out.println("Vous devez choisir un nombre correspondant à l'un des indices.");
+			System.out.println("-1. Retour");
+			System.out.println("Choisissez une carte : ");
+			playerThatSPlaying.displayCardsInHand();
+			choice = recoverPlayerChoice();
 		}
 	}
 	
 	private void playCard(Joueur playerThatSPlaying) {
+		System.out.println("-1. Retour");
 		System.out.println("Choisissez un serviteur : ");
 		playerThatSPlaying.displayPlayedCards();
-		int choice = recoverPlayerChoice() - 1;
-		try {
-			Carte card = playerThatSPlaying.getPlayedCards().get(choice);
-			System.out.println("Choisissez la cible : ");
-			playerThatSPlaying.getEnemy().displayTargetable();
-			choice = recoverPlayerChoice() - 1;
+		int choice = recoverPlayerChoice();
+		while(choice != -1) {
 			try {
-				((Serviteur)card).attack(playerThatSPlaying.getEnemy().getTargetable().get(choice));
+				Carte card = playerThatSPlaying.getPlayedCards().get(choice-1);
+				System.out.println("Choisissez la cible : ");
+				playerThatSPlaying.getEnemy().displayTargetable();
+				choice = recoverPlayerChoice() - 1;
+				try {
+					((Serviteur)card).attack(playerThatSPlaying.getEnemy().getTargetable().get(choice));
+				}catch(ArrayIndexOutOfBoundsException exc) {
+					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
+				}
 			}catch(ArrayIndexOutOfBoundsException exc) {
-				System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
+				System.out.println("Vous devez choisir un nombre correspondant à l'un des indices de vos serviteurs.");
 			}
-		}catch(ArrayIndexOutOfBoundsException exc) {
-			System.out.println("Vous devez choisir un nombre correspondant à l'un des indices de vos serviteurs.");
+			System.out.println("-1. Retour");
+			System.out.println("Choisissez un serviteur : ");
+			playerThatSPlaying.displayPlayedCards();
+			choice = recoverPlayerChoice();
 		}
 	}
 	
