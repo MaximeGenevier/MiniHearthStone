@@ -4,6 +4,7 @@
 package fr.hearthstone.main.designpattern.decorator;
 
 import fr.hearthstone.main.modele.Cible;
+import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
@@ -16,6 +17,34 @@ public class Provocation extends ServiteurDecorator{
 		super(serviteur);
 		serviteur.setShouldBeAttack(true);
 	}
+
+	@Override
+	public void die() {
+		serviteur.die();
+	}
+
+
+
+	@Override
+	public String getName() {
+		return serviteur.getName();
+	}
+
+
+
+	@Override
+	public int getManaCost() {
+		return serviteur.getManaCost();
+	}
+
+
+
+	@Override
+	public Joueur getPlayer() {
+		return serviteur.getPlayer();
+	}
+
+
 
 	@Override
 	public void attack(Cible target) {
