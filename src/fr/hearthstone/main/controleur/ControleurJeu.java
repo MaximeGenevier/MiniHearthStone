@@ -16,6 +16,8 @@ import fr.hearthstone.main.modele.hero.Mage;
 
 /**
  * @author maxime
+ * 
+ * Classe qui gère le déroulement du jeu
  *
  */
 public class ControleurJeu {
@@ -42,6 +44,12 @@ public class ControleurJeu {
 		initGame();
 	}
 	
+	
+	/**
+	 * Initialise la partie
+	 * Détermine quel joueur commence, et lui fait piocher 3 cartes
+	 * L'autre joueur pioche 4 cartes
+	 */
 	private void initGame() {
 		int random = 0 + (int)(Math.random() * 2);
 		if(random == 0) {
@@ -67,6 +75,10 @@ public class ControleurJeu {
 		}
 	}
 	
+	/**
+	 * Appelée pour débuter le jeu
+	 * Tant que les deux joueurs ont des PV le jeu continue
+	 */
 	public void gameBegins() {
 		while(playerOne.getHero().getCurrentHealth() > 0 && playerTwo.getHero().getCurrentHealth() > 0) {
 			System.out.println("Tour " + round);
@@ -76,6 +88,9 @@ public class ControleurJeu {
 		gameEnds();
 	}
 	
+	/**
+	 * A la fin du jeu on demande au joueur s'il veut recommencer
+	 */
 	private void gameEnds() {
 		System.out.println("Voulez vous rejouer?\n1. Oui\n2. Non\n");
 		int choice = recoverPlayerChoice();
@@ -86,6 +101,18 @@ public class ControleurJeu {
 		}
 	}
 	
+	/**
+	 * Début d'un tour
+	 * Affiche le joueur et autorise l'attaque des serviteurs de son plateau
+	 * Propose 5 options au joueur
+	 * Poser une carte
+	 * Joueur un serviteur
+	 * Utiliser sa compétence héroique
+	 * Afficher son héro
+	 * Passer son tour
+	 * 
+	 * Chaque choix renvoie à une action précise
+	 */
 	private void roundBegins() {
 		Joueur playerThatSPlaying = getPlayerThatShouldPlay();
 		for(Carte minion : playerThatSPlaying.getPlayedCards()) {
@@ -93,7 +120,7 @@ public class ControleurJeu {
 		}
 		System.out.println("A votre tour " + playerThatSPlaying.getName() + "!");
 		System.out.println(playerThatSPlaying.getHero());
-		System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
+		System.out.println("1. Poser une carte\n2. Jouer un serviteur\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
 		int choice = recoverPlayerChoice();
 		while(choice != 5) {
 			if(choice == 1) {
@@ -104,11 +131,11 @@ public class ControleurJeu {
 				playAbility(playerThatSPlaying);
 			}else if(choice == 4) {
 				System.out.println("Votre héro : ");
-				System.out.println(playerThatSPlaying.getHero().describe());
+				System.out.println(playerThatSPlaying.getHero().describe()); // Affiche le héro
 				System.out.println("Votre main : \n");
-				playerThatSPlaying.displayCardsInHand();
+				playerThatSPlaying.displayCardsInHand(); // Affiche la main du joueur
 				System.out.println("Votre plateau : \n");
-				playerThatSPlaying.displayPlayedCards();								
+				playerThatSPlaying.displayPlayedCards(); // Affiche le plateau du joueur	
 			}else {
 				continue;
 			}
@@ -118,6 +145,12 @@ public class ControleurJeu {
 		roundEnds(playerThatSPlaying);
 	}
 	
+	/**
+	 * @param playerThatSPlaying joueur en train de jouer
+	 * 
+	 * Termine le tour du joueur : incrémente son mana de 1 et le recharge, reinitialise sa compétence héroique (STATE)
+	 * met à jour le joueur qui doit joueur
+	 */
 	private void roundEnds(Joueur playerThatSPlaying) {
 		playerThatSPlaying.roundSEnd();
 		getPlayerWillPlayed().drawCard();
@@ -125,6 +158,13 @@ public class ControleurJeu {
 
 	}
 	
+	/**
+	 * @param playerThatSPlaying joueur en train de jouer
+	 * 
+	 * Affiche les cartes de la main 
+	 * Récupère le choix du joueur
+	 * pose un serviteur ou active un sort selon le choix du joueur
+	 */
 	private void placeCard(Joueur playerThatSPlaying) {
 		System.out.println("-1. Retour");
 		System.out.println("Choisissez une carte : ");
@@ -153,6 +193,10 @@ public class ControleurJeu {
 		}
 	}
 	
+	/**
+	 * @param playerThatSPlaying joueur qui joue
+	 * 
+	 */
 	private void playCard(Joueur playerThatSPlaying) {
 		System.out.println("-1. Retour");
 		System.out.println("Choisissez un serviteur : ");
@@ -187,7 +231,7 @@ public class ControleurJeu {
 				int choice = recoverPlayerChoice() - 1;
 				try {
 					playerThatSPlaying.getHero().getAbility().useAbility(playerThatSPlaying.getEnemy().getTargetable().get(choice));
-				}catch(ArrayIndexOutOfBoundsException exc) {
+				}catch(IndexOutOfBoundsException exc) {
 					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
 				}
 			}else {
