@@ -115,6 +115,7 @@ public class ControleurJeu {
 	 */
 	private void roundBegins() {
 		Joueur playerThatSPlaying = getPlayerThatShouldPlay();
+		playerThatSPlaying.drawCard();
 		for(Carte minion : playerThatSPlaying.getPlayedCards()) {
 			((Serviteur)minion).setCanAttack(true);
 		}
@@ -153,7 +154,6 @@ public class ControleurJeu {
 	 */
 	private void roundEnds(Joueur playerThatSPlaying) {
 		playerThatSPlaying.roundSEnd();
-		getPlayerWillPlayed().drawCard();
 		updatePlayerThatShouldPlay();
 
 	}
