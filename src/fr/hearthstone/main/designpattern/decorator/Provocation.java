@@ -15,7 +15,7 @@ public class Provocation extends ServiteurDecorator{
 
 	public Provocation(Serviteur serviteur) {
 		super(serviteur);
-		serviteur.setShouldBeAttack(true);
+		serviteur.setShouldBeAttacked(true);
 	}
 
 	@Override

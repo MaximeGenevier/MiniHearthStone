@@ -122,7 +122,7 @@ public abstract class Serviteur extends Carte implements Cible{
 	/**
 	 * @param shouldBeAttack the shouldBeAttack to set
 	 */
-	public void setShouldBeAttack(boolean shouldBeAttack) {
+	public void setShouldBeAttacked(boolean shouldBeAttack) {
 		this.shouldBeAttack = shouldBeAttack;
 	}
 
