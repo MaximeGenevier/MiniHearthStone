@@ -88,6 +88,9 @@ public class ControleurJeu {
 	
 	private void roundBegins() {
 		Joueur playerThatSPlaying = getPlayerThatShouldPlay();
+		for(Carte minion : playerThatSPlaying.getPlayedCards()) {
+			((Serviteur)minion).setCanAttack(true);
+		}
 		System.out.println("A votre tour " + playerThatSPlaying.getName() + "!");
 		System.out.println(playerThatSPlaying.getHero());
 		System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
@@ -140,7 +143,7 @@ public class ControleurJeu {
 					Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice-1);
 					playerThatSPlaying.playSpell(spell, target);
 				}
-			}catch (ArrayIndexOutOfBoundsException exc) {
+			}catch (IndexOutOfBoundsException exc) {
 				System.out.println("Vous devez choisir un nombre correspondant à l'un des indices.");
 			}
 			System.out.println("-1. Retour");
@@ -166,7 +169,7 @@ public class ControleurJeu {
 				}catch(ArrayIndexOutOfBoundsException exc) {
 					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
 				}
-			}catch(ArrayIndexOutOfBoundsException exc) {
+			}catch(IndexOutOfBoundsException exc) {
 				System.out.println("Vous devez choisir un nombre correspondant à l'un des indices de vos serviteurs.");
 			}
 			System.out.println("-1. Retour");
