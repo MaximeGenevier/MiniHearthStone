@@ -19,9 +19,10 @@ public class ChefDeRaid extends Serviteur{
 
 	@Override
 	public void proceed() {
-		for(Carte card : this.getPlayer().getCardsInHand()) {
+		for(Carte card : this.getPlayer().getPlayedCards()) {
 			((Serviteur)card).increaseAttack(1);
 		}
+		this.decreaseAttack(1);
 	}
 	
 	@Override

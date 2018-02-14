@@ -29,6 +29,11 @@ public class Provocation extends ServiteurDecorator{
 	}
 	
 	@Override
+	public void setCanAttack(boolean canAttack) {
+		serviteur.setCanAttack(canAttack);
+	}
+	
+	@Override
 	public void increaseAttack(int increaseAmount) {
 		serviteur.increaseAttack(increaseAmount);
 	}

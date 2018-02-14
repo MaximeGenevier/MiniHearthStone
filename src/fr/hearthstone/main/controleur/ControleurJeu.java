@@ -89,16 +89,10 @@ public class ControleurJeu {
 	}
 	
 	/**
-	 * A la fin du jeu on demande au joueur s'il veut recommencer
+	 * Affiche le gagnant (dernier joueur a avoir joueur donc pas le joueur courrant mais le suivant)
 	 */
 	private void gameEnds() {
-		System.out.println("Voulez vous rejouer?\n1. Oui\n2. Non\n");
-		int choice = recoverPlayerChoice();
-		if(choice == 1) {
-			initGame();
-		}else {
-			scanner.close();
-		}
+		System.out.println("BRAVO " + getPlayerWillPlayed().getName());
 	}
 	
 	/**

@@ -26,6 +26,11 @@ public class VolDeVie extends ServiteurDecorator{
 	public void increaseAttack(int increaseAmount) {
 		serviteur.increaseAttack(increaseAmount);
 	}
+	
+	@Override
+	public void setCanAttack(boolean canAttack) {
+		serviteur.setCanAttack(canAttack);
+	}
 
 	@Override
 	public boolean beAttacked(int damageAmount) {

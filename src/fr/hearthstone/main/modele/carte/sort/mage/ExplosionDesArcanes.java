@@ -25,8 +25,8 @@ public class ExplosionDesArcanes extends Sort{
 	public void useSpell(Cible target) {
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			ArrayList<Carte> enemiesMinions = this.getPlayer().getEnemy().getPlayedCards();
-			for(Carte card : enemiesMinions) {
-				((Serviteur)card).beAttacked(1);
+			for(int i = 0; i < enemiesMinions.size(); i++){
+				((Serviteur)enemiesMinions.get(i)).beAttacked(1);
 			}
 		}
 	}

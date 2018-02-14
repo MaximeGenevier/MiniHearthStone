@@ -27,12 +27,12 @@ public class Tourbillon extends Sort{
 			ArrayList<Carte> enemiesMinions = this.getPlayer().getEnemy().getPlayedCards();
 			ArrayList<Carte> alliesMinions = this.getPlayer().getPlayedCards();
 			
-			for(Carte card : enemiesMinions) {
-				((Serviteur)card).beAttacked(1);
+			for(int i = 0; i < enemiesMinions.size(); i++){
+				((Serviteur)enemiesMinions.get(i)).beAttacked(1);
 			}
 			
-			for(Carte card : alliesMinions) {
-				((Serviteur)card).beAttacked(1);
+			for(int i = 0; i < alliesMinions.size(); i++){
+				((Serviteur)alliesMinions.get(i)).beAttacked(1);
 			}
 		}
 	}

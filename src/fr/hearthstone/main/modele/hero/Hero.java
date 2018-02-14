@@ -109,6 +109,9 @@ public abstract class Hero implements Cible, Sujet{
 	
 	public void increaseMaxMana() {
 		this.maxMana++;
+		if(this.maxMana > 10){
+			this.maxMana = 10;
+		}
 		this.currentMana = this.maxMana;
 	}
 	

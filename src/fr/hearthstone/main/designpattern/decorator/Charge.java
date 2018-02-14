@@ -39,6 +39,11 @@ public class Charge extends ServiteurDecorator{
 	}
 
 	@Override
+	public void setCanAttack(boolean canAttack) {
+		serviteur.setCanAttack(canAttack);
+	}
+
+	@Override
 	public String getName() {
 		return serviteur.getName();
 	}
