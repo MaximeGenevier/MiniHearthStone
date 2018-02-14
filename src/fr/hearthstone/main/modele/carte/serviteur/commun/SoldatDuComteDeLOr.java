@@ -7,11 +7,17 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Serviteur concret commun
+ * Possède provocation
  *
  */
 public class SoldatDuComteDeLOr extends Serviteur{
 
+	/**
+	 * @param player
+	 */
 	public SoldatDuComteDeLOr(Joueur player) {
 		this.name = "Soldat du comté de l'or";
 		this.manaCost = 1;

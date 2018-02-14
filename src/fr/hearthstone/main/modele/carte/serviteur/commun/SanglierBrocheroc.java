@@ -7,11 +7,16 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Serviteur concret commun
  *
  */
 public class SanglierBrocheroc extends Serviteur{
 
+	/**
+	 * @param player
+	 */
 	public SanglierBrocheroc(Joueur player) {
 		this.name = "Sanglier brocheroc";
 		this.manaCost = 1;

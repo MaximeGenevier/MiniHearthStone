@@ -7,11 +7,17 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Serviteur concret du paladin
+ * Possède vol de vie
  *
  */
 public class ChampionFrisselame extends Serviteur{
 
+	/**
+	 * @param player
+	 */
 	public ChampionFrisselame(Joueur player) {
 		this.player = player;
 		this.name = "Champion frisselame";

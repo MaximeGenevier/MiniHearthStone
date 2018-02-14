@@ -7,11 +7,16 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Serviteur concret commun
  *
  */
 public class YetiNoroit extends Serviteur{
 
+	/**
+	 * @param player
+	 */
 	public YetiNoroit(Joueur player) {
 		this.name = "Yéti noroit";
 		this.manaCost = 4;
