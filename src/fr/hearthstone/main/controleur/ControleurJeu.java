@@ -210,7 +210,7 @@ public class ControleurJeu {
 				choice = recoverPlayerChoice() - 1;
 				try {
 					((Serviteur)card).attack(playerThatSPlaying.getEnemy().getTargetable().get(choice));
-				}catch(ArrayIndexOutOfBoundsException exc) {
+				}catch(IndexOutOfBoundsException exc) {
 					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
 				}
 			}catch(IndexOutOfBoundsException exc) {
@@ -226,20 +226,52 @@ public class ControleurJeu {
 	private void playAbility(Joueur playerThatSPlaying) {
 		if(playerThatSPlaying.getHero().getClass().equals(Mage.class)) {
 			if(playerThatSPlaying.getHero().getAbility().getState().getClass().equals(EtatDisponible.class)) {
-				System.out.println("Choisissez la cible : ");
-				playerThatSPlaying.getEnemy().displayTargetable();
-				int choice = recoverPlayerChoice() - 1;
-				try {
-					playerThatSPlaying.getHero().getAbility().useAbility(playerThatSPlaying.getEnemy().getTargetable().get(choice));
-				}catch(IndexOutOfBoundsException exc) {
-					System.out.println("Vous devez choisir un nombre correspondant à l'une des cibles possible.");
-				}
+				Cible target = getTarget(playerThatSPlaying);
+				playerThatSPlaying.getHero().getAbility().useAbility(target);
 			}else {
 				System.out.println("Vous n'avez pas assez de mana.");
 			}
 		}else {
 			playerThatSPlaying.getHero().getAbility().useAbility();
 		}
+	}
+	
+	private Cible getTarget(Joueur playerThatSPlaying){
+		System.out.println("1. Alliés");
+		System.out.println("2. Ennemis");
+		int choice = recoverPlayerChoice();
+		while(choice != 1 && choice != 2){
+			System.out.println("Choix incorrect");
+			System.out.println("1. Alliés");
+			System.out.println("2. Ennemis");
+			choice = recoverPlayerChoice();
+		}
+		System.out.println("Choisissez l'indice de la cible");
+		Cible target;
+		if(choice == 1){
+			System.out.println("0. ");
+			playerThatSPlaying.getHero().describe();
+			playerThatSPlaying.displayPlayedCards();
+			choice = recoverPlayerChoice();
+			while(choice < 0 && choice > playerThatSPlaying.getPlayedCards().size()){
+				System.out.println("Choix incorrect");
+				choice = recoverPlayerChoice();
+			}
+			if(choice == 0){
+				target = ((Cible)playerThatSPlaying.getHero());
+			}else{
+				target = ((Cible)playerThatSPlaying.getPlayedCards().get(choice - 1));
+			}
+		}else{
+			playerThatSPlaying.getEnemy().displayTargetable();
+			choice = recoverPlayerChoice();
+			while(choice < 0 && choice > playerThatSPlaying.getEnemy().getTargetable().size()){
+				System.out.println("Choix incorrect");
+				choice = recoverPlayerChoice();
+			}
+			target = playerThatSPlaying.getEnemy().getTargetable().get(choice - 1);
+		}
+		return target;
 	}
 	
 	private Joueur getPlayerThatShouldPlay() {
