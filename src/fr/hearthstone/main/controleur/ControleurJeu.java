@@ -115,9 +115,9 @@ public class ControleurJeu {
 		}
 		System.out.println("A votre tour " + playerThatSPlaying.getName() + "!");
 		System.out.println(playerThatSPlaying.getHero());
-		System.out.println("1. Poser une carte\n2. Jouer un serviteur\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
+		System.out.println("1. Poser une carte\n2. Jouer un serviteur\n3. Compétence héroïque\n4. Afficher héro\n5. Afficher adversaire\n6. Passer le tour");
 		int choice = recoverPlayerChoice();
-		while(choice != 5) {
+		while(choice != 6) {
 			if(choice == 1) {
 				placeCard(playerThatSPlaying);
 			}else if(choice == 2){
@@ -131,6 +131,11 @@ public class ControleurJeu {
 				playerThatSPlaying.displayCardsInHand(); // Affiche la main du joueur
 				System.out.println("Votre plateau : \n");
 				playerThatSPlaying.displayPlayedCards(); // Affiche le plateau du joueur	
+			}else if(choice == 5){
+				System.out.println("Le héro adverse: ");
+				System.out.println(playerThatSPlaying.getEnemy().getHero().describe()); // Affiche le héro
+				System.out.println("Le plateau adverse: \n");
+				playerThatSPlaying.getEnemy().displayPlayedCards(); // Affiche le plateau du joueur	
 			}else {
 				continue;
 			}
