@@ -7,48 +7,67 @@ import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.carte.Carte;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Serviteur abstrait, un serviteur connait sa vie actuelle, sa vie
+ * maximum, son attaque, s'il peut attaquer et s'il doit etre attaqué
  *
  */
 public abstract class Serviteur extends Carte implements Cible{
 
-	protected int currentHealth;
-	protected int maxHealth;
-	protected int attack;
-	protected boolean shouldBeAttack;
-	protected boolean canAttack;
+	protected int 		currentHealth;		// Vie actuelle
+	protected int 		maxHealth;			// Vie maximum
+	protected int 		attack;				// Montant de l'attaque
+	protected boolean 	shouldBeAttack;		// Vrai lorsque le serviteur a provocation
+	protected boolean 	canAttack;			// Faux par défaut, vaut vrai lorsque le serviteur a charge ou lorsque un tour commence
 	
+	/* (non-Javadoc)
+	 * @see fr.hearthstone.main.modele.Cible#attack(fr.hearthstone.main.modele.Cible)
+	 */
 	public void attack(Cible target) {
 		if(this.canAttack) {
-			target.beAttacked(this.attack);
-			this.canAttack = false;
+			target.beAttacked(this.attack); // attaque la cible
+			this.canAttack = false;			// Change la possibilité d'attaque
 		}else {
 			System.out.println("Ce serviteur ne peut pas encore attaquer.");
 		}
 	}
 	
+	/**
+	 * Implémentée lorsqu'une carte à un effet spécial sur le terrain lorsqu'elle 
+	 * est invoquée (ChefDeRaid)
+	 */
 	public void proceed() {
-		// Implémentée lorsqu'une carte à un effet spécial sur le terrain lorsqu'elle 
-		// est invoquée
+		
 	}
 	
+	/**
+	 * Appelée lorsque le serviteur meurt
+	 * Le retire des cartes du plateau du joueur
+	 */
 	public void die() {
 		this.getPlayer().removePlayedCard(this);
 	}
 	
+	/* (non-Javadoc)
+	 * @see fr.hearthstone.main.modele.Cible#beAttacked(int)
+	 */
 	public boolean beAttacked(int damageAmount) {
 		this.currentHealth -= damageAmount;
-		if(this.currentHealth <= 0) {
+		if(this.currentHealth <= 0) { // Si les pv du serviteur sont < 0
 			this.currentHealth = 0;
 			System.out.println(this.getName() + " meurt.");
-			this.die();
+			this.die(); // Le serviteur meurt
 			return true;
 		}
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see fr.hearthstone.main.modele.Cible#beHealed(int)
+	 */
 	public void beHealed(int healAmount) {
-		
+		// En prevision d'autres cartes : sort de soin par exemple
 		this.currentHealth += healAmount;
 		
 		if(this.currentHealth > this.maxHealth) {
@@ -57,14 +76,27 @@ public abstract class Serviteur extends Carte implements Cible{
 		
 	}
 	
+	/**
+	 * Appelée pour incrémenter l'attaque du serviteur
+	 * @param increaseAmount
+	 */
 	public void increaseAttack(int increaseAmount) {
 		this.attack += increaseAmount;
 	}
 	
+	/**
+	 * Appelée pour décrémenter l'attaque du serviteur
+	 * @param decreaseAmount
+	 */
 	public void decreaseAttack(int decreaseAmount) {
 		this.attack -= decreaseAmount;
 	}
 	
+	/**
+	 * Appelée pour incrémenter la vie maximum du serviteur et 
+	 * met  à jour sa vie actuelle
+	 * @param increaseAmount
+	 */
 	public void increaseMaxHealth(int increaseAmount) {
 		this.maxHealth += increaseAmount;
 		this.currentHealth += increaseAmount;

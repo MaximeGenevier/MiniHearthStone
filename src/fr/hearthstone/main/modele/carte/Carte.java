@@ -6,20 +6,33 @@ package fr.hearthstone.main.modele.carte;
 import fr.hearthstone.main.modele.Joueur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Carte abstraite 
+ * Une carte connait son nom, sa description, son cout et le 
+ * joueur a laquelle elle appartient
  *
  */
 public abstract class Carte {
 
-	protected String name;
-	protected String description;
-	protected int manaCost;
-	protected Joueur player;
+	protected String 	name;			// Le nom de la carte
+	protected String 	description;	// La description
+	protected int 		manaCost;		// Le cout en mana
+	protected Joueur 	player;			// Le joueur de la carte
 	
+	/**
+	 * Constructeur vide
+	 */
 	public Carte() {
 		super();
 	}
 	
+	/**
+	 * @param name
+	 * @param manaCost
+	 * @param player
+	 * @param description
+	 */
 	public Carte(String name, int manaCost, Joueur player, String description) {
 		super();
 		this.name = name;

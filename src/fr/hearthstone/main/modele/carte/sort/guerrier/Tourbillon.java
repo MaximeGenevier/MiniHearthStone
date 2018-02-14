@@ -12,15 +12,24 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 import fr.hearthstone.main.modele.carte.sort.Sort;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Sort concret du guerrier
+ * Inflige 1 point de dégats à tous les serviteurs
  *
  */
 public class Tourbillon extends Sort{
 
+	/**
+	 * @param player
+	 */
 	public Tourbillon(Joueur player) {
 		super("Tourbillon", 1, player, "Inflige 1 point de dégats à TOUS les serviteurs.");
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.hearthstone.main.modele.carte.sort.Sort#useSpell(fr.hearthstone.main.modele.Cible)
+	 */
 	@Override
 	public void useSpell(Cible target) {
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
@@ -28,11 +37,11 @@ public class Tourbillon extends Sort{
 			ArrayList<Carte> alliesMinions = this.getPlayer().getPlayedCards();
 			
 			for(int i = 0; i < enemiesMinions.size(); i++){
-				((Serviteur)enemiesMinions.get(i)).beAttacked(1);
+				((Serviteur)enemiesMinions.get(i)).beAttacked(1); // inflige des dégats aux serviteurs ennemis
 			}
 			
 			for(int i = 0; i < alliesMinions.size(); i++){
-				((Serviteur)alliesMinions.get(i)).beAttacked(1);
+				((Serviteur)alliesMinions.get(i)).beAttacked(1); // inflige des dégats aux serviteurs alliés
 			}
 		}
 	}

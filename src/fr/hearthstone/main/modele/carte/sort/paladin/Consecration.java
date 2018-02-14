@@ -12,21 +12,30 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 import fr.hearthstone.main.modele.carte.sort.Sort;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Sort concret du paladin
+ * Inflige 2 points de dégats aux serviteurs ennemis
  *
  */
 public class Consecration extends Sort{
 
+	/**
+	 * @param player
+	 */
 	public Consecration(Joueur player) {
 		super("Consécration", 4, player, "Inflige 2 points de dégats aux serviteurs ennemis.");
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.hearthstone.main.modele.carte.sort.Sort#useSpell(fr.hearthstone.main.modele.Cible)
+	 */
 	@Override
 	public void useSpell(Cible target) {
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			ArrayList<Carte> enemiesMinions = this.getPlayer().getEnemy().getPlayedCards();
 			for(Carte card : enemiesMinions) {
-				((Serviteur)card).beAttacked(2);
+				((Serviteur)card).beAttacked(2); // inflige des dégats aux serviteurs ennemis
 			}
 		}
 	}
