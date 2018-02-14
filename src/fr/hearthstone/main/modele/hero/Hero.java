@@ -21,6 +21,18 @@ import fr.hearthstone.main.modele.competence.Competence;
  * et le joueur auquel il appartient
  *
  */
+/**
+ * @author E178130U
+ *
+ */
+/**
+ * @author E178130U
+ *
+ */
+/**
+ * @author E178130U
+ *
+ */
 public abstract class Hero implements Cible, Sujet{
 	
 	protected String name;
@@ -57,44 +69,57 @@ public abstract class Hero implements Cible, Sujet{
 		this.addAvailableCardName("YetiNoroit");
 	}
 
+	
+	/**
+	 * Appelée lorsque le hero est attaqué, renvoie true si le héro meurt et false s'il est vivant
+	 * Recoit en paramètre le montant des dommages 
+	 */
 	public boolean beAttacked(int damageAmount) {
-		if(this.armor > 0) {
-			this.currentHealth -= this.decreaseArmor(damageAmount);
+		if(this.armor > 0) { // Le héro a de l'armure
+			this.currentHealth -= this.decreaseArmor(damageAmount); // Diminue l'armure et récupère les dommages restants
 			if(this.currentHealth <= 0) {
 				this.currentHealth = 0;
-				setHeroStatistics();
+				setHeroStatistics();	// Observer
 				return true;
 			}
-			setHeroStatistics();
+			setHeroStatistics(); // Observer
 			return false;
 		}else {
 			this.currentHealth -= damageAmount;
 			if(this.currentHealth <= 0) {
 				this.currentHealth = 0;
-				setHeroStatistics();
+				setHeroStatistics(); // Observer
 				return true;
 			}
-			setHeroStatistics();
+			setHeroStatistics(); // Observer
 			return false;
 		}
 	}
 	
+	/**
+	 * Appelée lorsque le héro est soigné
+	 * reçoit en paramètre le montant du soin
+	 */
 	public void beHealed(int healAmount) {
 		this.currentHealth += healAmount;
 		if(this.currentHealth > this.maxHealth) {
 			this.currentHealth = this.maxHealth;
 		}
-		setHeroStatistics();
+		setHeroStatistics(); // Observer
 	}
 	
+	/**
+	 * 
+	 * @param armorAmount montant de l'armure ajouté
+	 */
 	public void increaseArmor(int armorAmount) {
 		this.armor += armorAmount;
-		setHeroStatistics();
+		setHeroStatistics(); // Observer
 	}
 	
 	/**
 	 * @param damageAmount
-	 * @return int difference between armor and damage.
+	 * @return int différence entre l'armure et les dommages.
 	 */
 	public int decreaseArmor(int damageAmount) {
 		int remainingDamage = 0;
@@ -104,9 +129,13 @@ public abstract class Hero implements Cible, Sujet{
 			this.armor = 0;
 		}
 		setHeroStatistics();
-		return remainingDamage;
+		return remainingDamage; // Dommage restant après réduction de l'armure
 	}
 	
+	/**
+	 * Incrémente le mana maximum de 1 dans une limite de 10 
+	 * et recharche le mana courrant
+	 */
 	public void increaseMaxMana() {
 		this.maxMana++;
 		if(this.maxMana > 10){
@@ -115,9 +144,15 @@ public abstract class Hero implements Cible, Sujet{
 		this.currentMana = this.maxMana;
 	}
 	
+	/**
+	 * 
+	 * @param manaCost cout de la carte utilisée
+	 * @return boolean true si la carte peut etre utilisée false sinon
+	 */
 	public boolean useMana(int manaCost) {
 		if(this.currentMana >= manaCost) {
 			this.currentMana -= manaCost;
+			setHeroStatistics(); // Observer
 			return true;
 		}else {
 			System.out.println("Vous n'avez pas assez de mana.");
@@ -125,20 +160,32 @@ public abstract class Hero implements Cible, Sujet{
 		}
 	}
 	
+	/**
+	 * Ajoute un observateur au héro
+	 */
 	public void registerObs(HeroObserver obs) {
 		observers.add(obs);
 	}
 	
+	/**
+	 * Supprime un observateur du héro
+	 */
 	public void deleteObs(HeroObserver obs) {
 		observers.remove(obs);
 	}
 	
+	/**
+	 * notifie les observateurs d'un changement de stats (vie armure, mana)
+	 */
 	public void notifyObs() {
 		for(HeroObserver obs : observers) {
 			obs.actualize(currentHealth, currentMana, armor);
 		}
 	}
 	
+	/** 
+	 * appelle la méthode de mise a jour des observers
+	 */
 	public void setHeroStatistics() {
 		notifyObs();
 	}
