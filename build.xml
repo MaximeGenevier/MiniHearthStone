@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MiniHearthStone" default="main" basedir=".">
+    <property name="projet.nom" value="MiniHearthStone"/>
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="build/classes"/>
+    <property name="jar.dir" value="build/jar/"/>
+
+    <target name="clean" description="Suppression des répertoires et fichiers générés.">
+        <!-- Supprime le répertoire build -->
+        <delete dir="${build.dir}"/>
+    </target>
+    <target name="compile" description="Crée un répertoire classes/ et compile dans celui-ci.">
+	    <!-- Crée le répertoire build et le répertoire classes -->
+        <mkdir dir="${classes.dir}"/>
+	    <!-- Compile les fichiers .java du répertoire src dans le répertoire classes-->
+        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+    <target name="jar" depends="compile" description="Crée un répertoire jar/ et crée une archive dans celui-ci">
+        <!-- Crée le répertoire jar dans le répertoire build-->
+        <mkdir dir="${jar.dir}"/>
+        <!-- Crée l'archive Operations.jar dans le répertoire jar/ en utilisant les .class de /classes -->
+        <jar destfile="${jar.dir}/${projet.nom}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="fr.hearthstone.main.vue.MiniHearthstone"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="run" depends="jar" description="Exécute le programme Java exercice.jar">
+	    <!-- Exécute le programme Operations.jar dans une nouvelle JVM -->
+        <java jar="${jar.dir}${projet.nom}.jar" fork="true"/>
+    </target>
+
+    <target name="clean-build" depends="clean,jar" description="Nettoie le build après utilisation"></target>
+
+    <target name="main" depends="clean,run" description="Il s'agit de la cible par défaut">
+	</target>
+</project>
