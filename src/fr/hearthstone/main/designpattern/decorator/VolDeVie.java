@@ -8,7 +8,13 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Decorateur concret de Serviteur 
+ * Confère vol de vie à un Serviteur
+ * Lorsqu'il attaque, il rend à son héro 
+ * un montant de point de vie égal à son
+ * attaque
  *
  */
 public class VolDeVie extends ServiteurDecorator{
@@ -59,15 +65,15 @@ public class VolDeVie extends ServiteurDecorator{
 	
 	@Override
 	public void attack(Cible target) {
-		if(this.canAttack) {
+		if(this.canAttack) { // Redéfinie la méthode Serviteur.attack()
 			serviteur.attack(target);
-			serviteur.getPlayer().getHero().beHealed(serviteur.getAttack());
+			serviteur.getPlayer().getHero().beHealed(serviteur.getAttack()); // Rend les PV au héro
 		}
 	}
 
 	@Override
 	public String describe() {
-		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Vol de vie";
+		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Vol de vie"; // Surcharge describe()
 		return desc;
 	}
 	

@@ -21,42 +21,34 @@ import fr.hearthstone.main.modele.competence.Competence;
  * et le joueur auquel il appartient
  *
  */
-/**
- * @author E178130U
- *
- */
-/**
- * @author E178130U
- *
- */
-/**
- * @author E178130U
- *
- */
 public abstract class Hero implements Cible, Sujet{
 	
-	protected String name;
-	protected Competence ability;
-	protected int currentHealth;
-	protected int maxHealth;
-	protected int currentMana;
-	protected int maxMana;
-	protected int armor;
-	protected CarteFactory factory;
-	protected List<String> availableCardsName;
-	protected Joueur player;
-	protected ArrayList<HeroObserver> observers;
+	protected String 					name;			// Nom du héro
+	protected Competence 				ability;		// Compétence héroique
+	protected int 						currentHealth;	// Vie actuelle
+	protected int 						maxHealth;		// Vie maximum : 30
+	protected int 						currentMana;	// Mana actuel
+	protected int 						maxMana;		// Mana maximum, incrémenté de 1 par tour dans la limite de 10
+	protected int 						armor;			// Armure
+	protected CarteFactory 				factory;		// Factory propre à chaque héro
+	protected List<String> 				availableCardsName;	// Nom des cartes communes à chaque héro
+	protected Joueur 					player;				// Joueur
+	protected ArrayList<HeroObserver> 	observers;			// Observateurs
 	
+	/**
+	 * @param name
+	 * @param player
+	 */
 	public Hero(String name, Joueur player) {
 		super();
-		this.name = name;
-		this.currentHealth = 30;
-		this.maxHealth = 30;
-		this.maxMana = 1;
-		this.currentMana = this.maxMana;
-		this.armor = 0;
-		this.player = player;
-		this.observers = new ArrayList<>();
+		this.name 				= name;
+		this.currentHealth 		= 30;
+		this.maxHealth 			= 30;
+		this.maxMana 			= 1;
+		this.currentMana 		= this.maxMana;
+		this.armor 				= 0;
+		this.player 			= player;
+		this.observers 			= new ArrayList<>();
 		this.availableCardsName = new ArrayList<String>();
 		
 		// Cette liste est utilisée pour tirer une carte aléatoirement

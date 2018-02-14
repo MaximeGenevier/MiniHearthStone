@@ -17,7 +17,11 @@ import fr.hearthstone.main.modele.carte.sort.guerrier.MaitriseDuBlocage;
 import fr.hearthstone.main.modele.carte.sort.guerrier.Tourbillon;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Factory concrète pour le guerrier
+ * Permet de créer les cartes communes
+ * et celles propres au guerrier
  *
  */
 public class CarteGuerrierFactory extends CarteFactory{

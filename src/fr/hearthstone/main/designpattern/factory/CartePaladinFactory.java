@@ -19,8 +19,11 @@ import fr.hearthstone.main.modele.carte.sort.paladin.BenedictionDePuissance;
 import fr.hearthstone.main.modele.carte.sort.paladin.Consecration;
 
 /**
- * @author Maxime
- *
+ * @author Maxime GENEVIER
+ * 
+ * Factory concrète pour le paladin
+ * Permet de créer les cartes communes
+ * et celles propres au paladin
  */
 public class CartePaladinFactory extends CarteFactory{
 

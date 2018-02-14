@@ -8,14 +8,18 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Décorateur concret de Serviteur
+ * 
+ * Permet à un Serviteur d'attaquer dès qu'il est posé sur le plateau
  *
  */
 public class Charge extends ServiteurDecorator{
 
 	public Charge(Serviteur serviteur) {
 		super(serviteur);
-		serviteur.setCanAttack(true);
+		serviteur.setCanAttack(true); // Surcharge le constructeur
 	}
 	
 	@Override
@@ -65,7 +69,7 @@ public class Charge extends ServiteurDecorator{
 	
 	@Override
 	public String describe() {
-		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Charge";
+		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Charge"; // Surcharge describe()
 		return desc;
 	}
 	

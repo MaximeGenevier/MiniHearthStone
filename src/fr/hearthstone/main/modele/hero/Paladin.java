@@ -9,15 +9,22 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.competence.Renfort;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Paladin : type de héro avec la compétence Renfort
  *
  */
 public class Paladin extends Hero{
 
+	/**
+	 * @param player
+	 */
 	public Paladin(Joueur player) {
 		super("Paladin", player);
 		this.ability = new Renfort(this);
 		this.factory = new CartePaladinFactory();
+		
+		// Cartes propres au paladin
 		this.addAvailableCardName("ChampionFrisselame");
 		this.addAvailableCardName("BenedictionDePuissance");
 		this.addAvailableCardName("Consecration");

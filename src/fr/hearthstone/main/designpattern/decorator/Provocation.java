@@ -8,14 +8,20 @@ import fr.hearthstone.main.modele.Joueur;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Décorateur concret de Serviteur
+ * 
+ * Permet à un Serviteur d'obtenir Provocation
+ * Celui ci doit être tué avant de pouvoir cibler 
+ * le héro ou les autres serviteurs adverses
  *
  */
 public class Provocation extends ServiteurDecorator{
 
 	public Provocation(Serviteur serviteur) {
 		super(serviteur);
-		serviteur.setShouldBeAttacked(true);
+		serviteur.setShouldBeAttacked(true); // Surcharge constructeur
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class Provocation extends ServiteurDecorator{
 	
 	@Override
 	public String describe() {
-		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Provocation";
+		String desc = serviteur.describe() + "\n\t{CAPACITE} = " + " Provocation"; // Surcharge describe()
 		return desc;
 	}
 	

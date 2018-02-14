@@ -19,8 +19,11 @@ import fr.hearthstone.main.modele.carte.sort.mage.ImageMiroir;
 import fr.hearthstone.main.modele.carte.sort.mage.Metamorphose;
 
 /**
- * @author Maxime
- *
+ * @author Maxime GENEVIER
+ * 
+ * Factory concrète pour le mage
+ * Permet de créer les cartes communes
+ * et celles propres au mage
  */
 public class CarteMageFactory extends CarteFactory{
 

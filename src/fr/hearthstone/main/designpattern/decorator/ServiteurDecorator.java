@@ -7,7 +7,12 @@ import fr.hearthstone.main.modele.Cible;
 import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 
 /**
- * @author Maxime
+ * @author Maxime GENEVIER
+ * 
+ * Decorateur abstrait de Serviteur
+ * 
+ * Possède un attribut Serviteur et une méthode abstraite attack()
+ * qui redéfinit la méthode Serviteur.attack()
  *
  */
 public abstract class ServiteurDecorator extends Serviteur{

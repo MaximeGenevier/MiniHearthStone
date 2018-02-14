@@ -4,7 +4,12 @@
 package fr.hearthstone.main.designpattern.observer;
 
 /**
- * @author maxime
+ * @author Maxime GENEVIER
+ * 
+ * Sujet pour le pattern Observer
+ * 
+ * Permet d'enregistrer, supprimer et
+ * notifier des observateurs
  *
  */
 public interface Sujet {

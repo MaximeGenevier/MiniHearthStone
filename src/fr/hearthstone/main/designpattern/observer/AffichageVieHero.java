@@ -6,7 +6,11 @@ package fr.hearthstone.main.designpattern.observer;
 import fr.hearthstone.main.modele.hero.Hero;
 
 /**
- * @author maxime
+ * @author Maxime GENEVIER
+ * 
+ * Implemente l'observateur et l'affichage
+ * Met à jour les données du héro (vie, mana, armure)
+ * et les affiche
  *
  */
 public class AffichageVieHero implements HeroObserver, HeroAffichage{
@@ -18,17 +22,19 @@ public class AffichageVieHero implements HeroObserver, HeroAffichage{
 	
 	public AffichageVieHero(Sujet hero) {
 		this.hero = hero;
-		this.hero.registerObs(this);
+		this.hero.registerObs(this); // Enregistre l'observateur
 	}
 	
 	@Override
-	public void print() {
+	public void print() { 
+		// Affichage
 		System.out.println("[HERO]" + ((Hero)hero).getName() + "\n\t{VIE} : " + heroCurrentHealth
 				+ " {MANA} : " + heroCurrentMana + " {ARMURE} : " + heroCurrentArmor);
 	}
 
 	@Override
 	public void actualize(int currentHealth, int currentMana, int currentArmor) {
+		// Actualisation des données
 		this.heroCurrentHealth = currentHealth;
 		this.heroCurrentMana = currentMana;
 		this.heroCurrentArmor = currentArmor;

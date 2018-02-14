@@ -15,7 +15,7 @@ import fr.hearthstone.main.modele.carte.sort.Sort;
 import fr.hearthstone.main.modele.hero.Mage;
 
 /**
- * @author maxime
+ * @author Maxime GENEVIER
  * 
  * Classe qui gère le déroulement du jeu
  *
@@ -24,8 +24,8 @@ public class ControleurJeu {
 
 	private Joueur playerOne;
 	private Joueur playerTwo;
-	private AffichageVieHero displayPlayerOne;
-	private AffichageVieHero displayPlayerTwo;
+	private AffichageVieHero displayPlayerOne; // Observateur joueur 1
+	private AffichageVieHero displayPlayerTwo; // Observateur joueur 2
 	private int	round;
 	private Scanner scanner;
 	
@@ -171,10 +171,7 @@ public class ControleurJeu {
 					playerThatSPlaying.playMinion(minion);
 				}catch(ClassCastException exc) {
 					Sort spell = (Sort)playerThatSPlaying.getCardsInHand().get(choice-1);
-					System.out.println("Choisissez la cible : ");
-					playerThatSPlaying.getEnemy().displayTargetable();
-					choice = recoverPlayerChoice() - 1;
-					Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice);
+					Cible target = getTarget(playerThatSPlaying);
 					playerThatSPlaying.playSpell(spell, target);
 				}
 			}catch (IndexOutOfBoundsException exc) {
@@ -217,19 +214,28 @@ public class ControleurJeu {
 		}
 	}
 	
+	/**
+	 * Jouer la compétence héroique
+	 * @param playerThatSPlaying joueur en train de jouer
+	 */
 	private void playAbility(Joueur playerThatSPlaying) {
-		if(playerThatSPlaying.getHero().getClass().equals(Mage.class)) {
-			if(playerThatSPlaying.getHero().getAbility().getState().getClass().equals(EtatDisponible.class)) {
-				Cible target = getTarget(playerThatSPlaying);
+		if(playerThatSPlaying.getHero().getClass().equals(Mage.class)) { // Si le héro est un mage
+			if(playerThatSPlaying.getHero().getAbility().getState().getClass().equals(EtatDisponible.class)) { // et que la compétence est disponible
+				Cible target = getTarget(playerThatSPlaying);	// Récupère la cible
 				playerThatSPlaying.getHero().getAbility().useAbility(target);
 			}else {
 				System.out.println("Vous n'avez pas assez de mana.");
 			}
 		}else {
-			playerThatSPlaying.getHero().getAbility().useAbility();
+			playerThatSPlaying.getHero().getAbility().useAbility(); // Comportement classique
 		}
 	}
 	
+	/**
+	 * Récupère le choix du joueur pour les compétences héroiques et les sorts
+	 * @param playerThatSPlaying
+	 * @return
+	 */
 	private Cible getTarget(Joueur playerThatSPlaying){
 		System.out.println("1. Alliés");
 		System.out.println("2. Ennemis");
@@ -242,22 +248,16 @@ public class ControleurJeu {
 		}
 		System.out.println("Choisissez l'indice de la cible");
 		Cible target;
-		if(choice == 1){
-			System.out.println("0. ");
-			playerThatSPlaying.getHero().describe();
+		if(choice == 1){ // Adapte l'affichage en fonction du camps à cibler
 			playerThatSPlaying.displayPlayedCards();
 			choice = recoverPlayerChoice();
-			while(choice < 0 && choice > playerThatSPlaying.getPlayedCards().size()){
+			while(choice < 1 && choice > playerThatSPlaying.getPlayedCards().size()){
 				System.out.println("Choix incorrect");
 				choice = recoverPlayerChoice();
 			}
-			if(choice == 0){
-				target = ((Cible)playerThatSPlaying.getHero());
-			}else{
-				target = ((Cible)playerThatSPlaying.getPlayedCards().get(choice - 1));
-			}
+			target = ((Cible)playerThatSPlaying.getPlayedCards().get(choice - 1));			
 		}else{
-			playerThatSPlaying.getEnemy().displayTargetable();
+			playerThatSPlaying.getEnemy().displayTargetable(); // Affiche seulement les cartes ciblables et (si aucune provocation) le héréo
 			choice = recoverPlayerChoice();
 			while(choice < 0 && choice > playerThatSPlaying.getEnemy().getTargetable().size()){
 				System.out.println("Choix incorrect");
@@ -268,6 +268,10 @@ public class ControleurJeu {
 		return target;
 	}
 	
+	/**
+	 * Récupère le joueur qui doit jouer
+	 * @return le joueur qui doit jouer
+	 */
 	private Joueur getPlayerThatShouldPlay() {
 		if(playerOne.isShouldPlay()) {
 			return playerOne;
@@ -276,6 +280,10 @@ public class ControleurJeu {
 		}
 	}
 	
+	/**
+	 * Récupère le joueur qui va jouer
+	 * @return
+	 */
 	private Joueur getPlayerWillPlayed() {
 		if(!playerOne.isShouldPlay()) {
 			return playerOne;
@@ -284,6 +292,9 @@ public class ControleurJeu {
 		}
 	}
 	
+	/**
+	 * Met à jour le joueur qui doit jouer
+	 */
 	private void updatePlayerThatShouldPlay() {
 		Joueur hasPlayed = getPlayerThatShouldPlay();
 		Joueur willPlayed = getPlayerWillPlayed();
@@ -291,6 +302,10 @@ public class ControleurJeu {
 		willPlayed.setShouldPlay(true);
 	}
 	
+	/**
+	 * Récupère le choix de l'utilisateur
+	 * @return
+	 */
 	private int recoverPlayerChoice() {
 		boolean error = true;
 		int choice = -1; // Variable pour récupérer le choix de l'utilisateur sous forme d'entier

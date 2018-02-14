@@ -21,8 +21,9 @@ public class Metamorphose extends Sort{
 	@Override
 	public void useSpell(Cible target) {
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
-			this.getPlayer().removePlayedCard(((Carte)target));
-			this.getPlayer().playSpecialCard("Mouton");
+			Joueur player = ((Carte)target).getPlayer();
+			player.removePlayedCard(((Carte)target));
+			player.playSpecialCard("Mouton", this.getPlayer().getHero().getFactory());
 		}
 	}
 
