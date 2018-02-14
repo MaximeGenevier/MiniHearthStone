@@ -139,7 +139,7 @@ public class ControleurJeu {
 			}else {
 				continue;
 			}
-			System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Passer le tour");
+			System.out.println("1. Poser une carte\n2. Jouer une carte\n3. Compétence héroïque\n4. Afficher héro\n5. Afficher adversaire\n6. Passer le tour");
 			choice = recoverPlayerChoice();
 		}
 		roundEnds(playerThatSPlaying);

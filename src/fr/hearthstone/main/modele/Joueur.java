@@ -164,14 +164,12 @@ public class Joueur {
 		
 		if(shouldBeTargetCards.size() > 0) { // Si il y a des serviteurs avec provocation, retourne cette liste
 			for (Carte carte : shouldBeTargetCards) {
-				Serviteur target = ((Serviteur)carte);
-				targetables.add(target);
+				targetables.add(((Serviteur)carte));
 			}
 		}else { // Sinon affiche le hero et le plateau du joueur
 			targetables.add(this.getHero());
 			for (Carte carte : playedCards) {
-				Serviteur target = ((Serviteur)carte);
-				targetables.add(target);
+				targetables.add((Serviteur)carte);
 			}
 		}
 		return targetables;

@@ -46,6 +46,7 @@ public abstract class Serviteur extends Carte implements Cible{
 	 * Le retire des cartes du plateau du joueur
 	 */
 	public void die() {
+		System.out.println(this.getPlayer().getPlayedCards().contains(this));
 		this.getPlayer().removePlayedCard(this);
 	}
 	

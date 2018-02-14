@@ -24,6 +24,11 @@ public class VolDeVie extends ServiteurDecorator{
 	}
 	
 	@Override
+	public void die() {
+		serviteur.die();
+	}
+	
+	@Override
 	public boolean isShouldBeAttack() {
 		return serviteur.isShouldBeAttack();
 	}
