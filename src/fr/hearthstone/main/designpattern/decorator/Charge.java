@@ -19,8 +19,23 @@ public class Charge extends ServiteurDecorator{
 	}
 	
 	@Override
-	public void die() {
-		serviteur.die();
+	public boolean isShouldBeAttack() {
+		return serviteur.isShouldBeAttack();
+	}
+	
+	@Override
+	public void increaseAttack(int increaseAmount) {
+		serviteur.increaseAttack(increaseAmount);
+	}
+
+	@Override
+	public boolean beAttacked(int damageAmount) {
+		return serviteur.beAttacked(damageAmount);
+	}
+
+	@Override
+	public void decreaseAttack(int decreaseAmount) {
+		serviteur.decreaseAttack(decreaseAmount);
 	}
 
 	@Override

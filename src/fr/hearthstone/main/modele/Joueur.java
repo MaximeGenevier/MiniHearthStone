@@ -81,14 +81,12 @@ public class Joueur {
 	}
 	
 	private ArrayList<Carte> getTanks() {
-		System.out.println("GET TANKS");
 		ArrayList<Carte> tanksMinions = new ArrayList<>();
 		for(Carte card : playedCards) {
 			if(((Serviteur)card).isShouldBeAttack()) {
 				tanksMinions.add(card);
 			}
 		}
-		System.out.println("TANKS SIZE " + tanksMinions.size());
 		return tanksMinions;
 	}
 	

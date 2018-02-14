@@ -180,7 +180,7 @@ public class ControleurJeu {
 					System.out.println("Choisissez la cible : ");
 					playerThatSPlaying.getEnemy().displayTargetable();
 					choice = recoverPlayerChoice() - 1;
-					Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice-1);
+					Cible target = (Cible)playerThatSPlaying.getEnemy().getTargetable().get(choice);
 					playerThatSPlaying.playSpell(spell, target);
 				}
 			}catch (IndexOutOfBoundsException exc) {

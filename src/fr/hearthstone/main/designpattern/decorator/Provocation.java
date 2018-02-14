@@ -22,29 +22,41 @@ public class Provocation extends ServiteurDecorator{
 	public void die() {
 		serviteur.die();
 	}
+	
+	@Override
+	public boolean isShouldBeAttack() {
+		return serviteur.isShouldBeAttack();
+	}
+	
+	@Override
+	public void increaseAttack(int increaseAmount) {
+		serviteur.increaseAttack(increaseAmount);
+	}
 
+	@Override
+	public boolean beAttacked(int damageAmount) {
+		return serviteur.beAttacked(damageAmount);
+	}
 
+	@Override
+	public void decreaseAttack(int decreaseAmount) {
+		serviteur.decreaseAttack(decreaseAmount);
+	}
 
 	@Override
 	public String getName() {
 		return serviteur.getName();
 	}
 
-
-
 	@Override
 	public int getManaCost() {
 		return serviteur.getManaCost();
 	}
 
-
-
 	@Override
 	public Joueur getPlayer() {
 		return serviteur.getPlayer();
 	}
-
-
 
 	@Override
 	public void attack(Cible target) {

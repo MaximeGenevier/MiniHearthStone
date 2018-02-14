@@ -13,7 +13,7 @@ import fr.hearthstone.main.modele.carte.serviteur.Serviteur;
 public class Reflet extends Serviteur{
 
 	public Reflet(Joueur player) {
-		this.name = "Reflet";
+		this.name = "Image miroir";
 		this.manaCost = 0;
 		this.maxHealth = 2;
 		this.currentHealth = this.maxHealth;
