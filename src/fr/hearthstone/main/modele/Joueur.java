@@ -56,10 +56,8 @@ public class Joueur {
 	
 	public void playSpell(Sort spell, Cible target){
 		// use spell
-		if(this.getHero().useMana(spell.getManaCost())) {
-			spell.useSpell(target);
-			this.cardsInHand.remove(spell);
-		}
+		spell.useSpell(target);
+		this.cardsInHand.remove(spell);
 	}
 	
 	public void removeHandCard(Carte card) {

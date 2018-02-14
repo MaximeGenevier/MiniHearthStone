@@ -22,18 +22,9 @@ public class MiniHearthstone {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		/*Joueur joueur1 = new Joueur("Arthas Menethil");
-		Joueur joueur2 = new Joueur("Antonidas");
 		
-		Hero paladin = new Paladin(joueur1);
-		Hero mage = new Mage(joueur2);
-		
-		joueur1.setHero(paladin);
-		joueur2.setHero(mage);
-		
-		joueur1.setEnemy(joueur2);
-		joueur2.setEnemy(joueur1);*/
+		System.out.println("BIENVENUE SUR HEARTHSTONE\nSuite à des problèmes techniques nous avons perdu\n"
+				+ "l interface graphique du jeu. Blizzard travaille sur la résolution de ce problème.\n\n");
 		
 		Joueur playerOne = selectHeroPlayer();
 		Joueur playerTwo = selectHeroPlayer();

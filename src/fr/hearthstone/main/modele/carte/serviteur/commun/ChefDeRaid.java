@@ -23,5 +23,13 @@ public class ChefDeRaid extends Serviteur{
 			((Serviteur)card).increaseAttack(1);
 		}
 	}
+	
+	@Override
+	public void die() {
+		for(Carte card : this.getPlayer().getCardsInHand()) {
+			((Serviteur)card).decreaseAttack(1);
+		}
+		super.die();
+	}
 
 }
