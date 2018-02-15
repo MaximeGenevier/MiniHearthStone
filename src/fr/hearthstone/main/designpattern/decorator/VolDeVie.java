@@ -70,7 +70,7 @@ public class VolDeVie extends ServiteurDecorator{
 	
 	@Override
 	public void attack(Cible target) {
-		if(this.canAttack) { // Redéfinie la méthode Serviteur.attack()
+		if(serviteur.isCanAttack()) { // Redéfinie la méthode Serviteur.attack()
 			serviteur.attack(target);
 			serviteur.getPlayer().getHero().beHealed(serviteur.getAttack()); // Rend les PV au héro
 		}
