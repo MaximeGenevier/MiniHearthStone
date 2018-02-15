@@ -37,7 +37,7 @@ public class Consecration extends Sort{
 			for(int i = 0; i < enemiesMinions.size(); i++) {
 				((Serviteur)enemiesMinions.get(i)).beAttacked(2); // inflige des dégats aux serviteurs ennemis
 			}
-			this.getPlayer().getHero().beAttacked(2);
+			this.getPlayer().getEnemy().getHero().beAttacked(2);
 		}
 	}
 
