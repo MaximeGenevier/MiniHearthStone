@@ -24,7 +24,7 @@ public class Consecration extends Sort{
 	 * @param player
 	 */
 	public Consecration(Joueur player) {
-		super("Consécration", 4, player, "Inflige 2 points de dégats aux serviteurs ennemis.");
+		super("Consécration", 4, player, "Inflige 2 points de dégats aux ennemis.");
 	}
 
 	/* (non-Javadoc)
@@ -34,9 +34,10 @@ public class Consecration extends Sort{
 	public void useSpell(Cible target) {
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			ArrayList<Carte> enemiesMinions = this.getPlayer().getEnemy().getPlayedCards();
-			for(Carte card : enemiesMinions) {
-				((Serviteur)card).beAttacked(2); // inflige des dégats aux serviteurs ennemis
+			for(int i = 0; i < enemiesMinions.size(); i++) {
+				((Serviteur)enemiesMinions.get(i)).beAttacked(2); // inflige des dégats aux serviteurs ennemis
 			}
+			this.getPlayer().getHero().beAttacked(2);
 		}
 	}
 
