@@ -35,7 +35,11 @@ public class Consecration extends Sort{
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			ArrayList<Carte> enemiesMinions = this.getPlayer().getEnemy().getPlayedCards();
 			for(int i = 0; i < enemiesMinions.size(); i++) {
+				boolean shouldDecrease = ((Serviteur)enemiesMinions.get(i)).getCurrentHealth() <= 2; // Un serviteur va mourir
 				((Serviteur)enemiesMinions.get(i)).beAttacked(2); // inflige des dégats aux serviteurs ennemis
+				if(shouldDecrease){
+					i--;
+				}
 			}
 			this.getPlayer().getEnemy().getHero().beAttacked(2);
 		}

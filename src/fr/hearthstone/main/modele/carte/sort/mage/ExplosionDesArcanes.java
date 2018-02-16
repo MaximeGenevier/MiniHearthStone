@@ -35,7 +35,11 @@ public class ExplosionDesArcanes extends Sort{
 		if(this.getPlayer().getHero().useMana(this.getManaCost())) {
 			ArrayList<Carte> enemiesMinions = this.getPlayer().getEnemy().getPlayedCards();
 			for(int i = 0; i < enemiesMinions.size(); i++){
+				boolean shouldDecrease = ((Serviteur)enemiesMinions.get(i)).getCurrentHealth() <= 1; // Un serviteur va mourir
 				((Serviteur)enemiesMinions.get(i)).beAttacked(1); // inflige des degats aux serviteurs ennemis
+				if(shouldDecrease){
+					i--;
+				}
 			}
 		}
 	}

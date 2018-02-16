@@ -37,11 +37,19 @@ public class Tourbillon extends Sort{
 			ArrayList<Carte> alliesMinions = this.getPlayer().getPlayedCards();
 			
 			for(int i = 0; i < enemiesMinions.size(); i++){
+				boolean shouldDecrease = ((Serviteur)enemiesMinions.get(i)).getCurrentHealth() <= 1; // Un serviteur va mourir
 				((Serviteur)enemiesMinions.get(i)).beAttacked(1); // inflige des dégats aux serviteurs ennemis
+				if(shouldDecrease){
+					i--;
+				}
 			}
 			
 			for(int i = 0; i < alliesMinions.size(); i++){
+				boolean shouldDecrease = ((Serviteur)enemiesMinions.get(i)).getCurrentHealth() <= 1; // Un serviteur va mourir
 				((Serviteur)alliesMinions.get(i)).beAttacked(1); // inflige des dégats aux serviteurs alliés
+				if(shouldDecrease){
+					i--;
+				}
 			}
 		}
 	}
