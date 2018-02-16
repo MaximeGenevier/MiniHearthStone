@@ -48,7 +48,7 @@ public class CartePaladinFactory extends CarteFactory{
 				card = new YetiNoroit(player);
 				break;
 			case "ChampionFrisselame" :
-				card = new VolDeVie(new ChampionFrisselame(player));
+				card = new Charge(new VolDeVie(new ChampionFrisselame(player)));
 				break;
 			case "RecrueDeLaMainDArgent" : 
 				card = new RecrueDeLaMainDArgent(player);
